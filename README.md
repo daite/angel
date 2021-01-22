@@ -19,3 +19,5 @@
 * [go module](https://blog.golang.org/using-go-modules)
 * [goquery documentation](https://pkg.go.dev/github.com/PuerkitoBio/goquery)
 * [css test env](https://try.jsoup.org/)
+* [go binary size reduce](https://stackoverflow.com/questions/3861634/how-to-reduce-compiled-file-size)
+* [go sync map to map](https://stackoverflow.com/questions/58995416/how-to-pretty-print-the-contents-of-a-sync-map)
