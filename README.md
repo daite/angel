@@ -10,7 +10,7 @@
 | No |      site     |             url             | status |
 |:--:|:-------------:|:---------------------------:|:------:|
 |  1 |    ttobogo    | https://ttobogo.net         |    O   |
-|  2 |   torrentube  | https://torrentube.to       |       |
+|  2 |   torrentube  | https://torrentube.to       |     O  |
 |  3 |     tshare    | https://tshare.org          |       |
 |  4 | torrentmobile | https://torrentmobile15.com |    O   |
 |  5 | torrentview   | https://torrentview28.com  |    O   |
