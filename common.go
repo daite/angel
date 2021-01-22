@@ -17,6 +17,7 @@ var (
 	TTOBoGoURL       = "https://ttobogo.net"
 	TorrentMobileURL = "https://torrentmobile15.com"
 	TorrentViewURL   = "https://torrentview29.com"
+	TorrentTubeURL   = "https://torrentube.to"
 	UserAgent        = "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_1_0)"
 )
 

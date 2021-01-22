@@ -30,7 +30,8 @@ func main() {
 					tb := angel.TToBoGo{}
 					tv := angel.TorrentView{}
 					tm := angel.TorrentMobile{}
-					s := []angel.Scraping{&tb, &tm, &tv}
+					tt := angel.TorrentTube{}
+					s := []angel.Scraping{&tb, &tv, &tm, &tt}
 					data := angel.CollectData(s, keyword)
 					angel.PrintData(data, false)
 					return nil

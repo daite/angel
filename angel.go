@@ -1,8 +1,11 @@
 package angel
 
 import (
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"log"
+	"regexp"
 	"strings"
 	"sync"
 
@@ -214,4 +217,46 @@ func (t *TorrentView) GetMagnet(url string) string {
 		return "NO MAGNET"
 	}
 	return magnet
+}
+
+// TorrentTube struct is for TorrentView torrent web site
+// It is exactly the same with torrentmobile
+type TorrentTube struct {
+	Keyword     string
+	SearchURL   string
+	ScrapedData map[string]string
+}
+
+// initialize function set keyword and URL based on default url
+func (t *TorrentTube) initialize(keyword string) {
+	t.Keyword = keyword
+	t.SearchURL = TorrentTubeURL + "/kt/search?p&q=" + keyword
+}
+
+// Crawl torrent data from web site
+func (t *TorrentTube) Crawl(keyword string) map[string]string {
+	fmt.Println("[*] TorrentTube starts Crawl!!")
+	t.initialize(keyword)
+	m := map[string]string{}
+	resp := GetResponseFromURL(t.SearchURL)
+	defer resp.Body.Close()
+	b, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	doc := string(b)
+	re := regexp.MustCompile(`\[[^\]]*\]`)
+	s := re.FindAllString(doc, -1)[1]
+	jsonStr := strings.Replace(s, "'", `"`, -1)
+	jsonMapArr := []map[string]interface{}{}
+	err = json.Unmarshal([]byte(jsonStr), &jsonMapArr)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	for _, d := range jsonMapArr {
+		title := d["fn"].(string)
+		magnet := "magnet:?xt=urn:btih:" + d["hs"].(string)
+		m[title] = magnet
+	}
+	return m
 }
