@@ -3,7 +3,7 @@
 # Purpose
 > To search torrent magnets in korea torrent sites without terrible Ads!! 
 # Screenshot
-![alt tag](https://raw.githubusercontent.com/daite/angel/main/resources/screenshot.png)
+![alt tag](https://raw.githubusercontent.com/daite/angel/main/resources/screenshot2.png)
 # Available sites
 | No |      site     |             url             | status |
 |:--:|:-------------:|:---------------------------:|:------:|
