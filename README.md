@@ -1,10 +1,11 @@
-# What's this?
+# 1.What's this?
 > Search torrent magnet
-# Purpose
+# 2.Purpose
 > To search torrent magnets in korea torrent sites without terrible Ads!! 
-# Screenshot
-![alt tag](https://raw.githubusercontent.com/daite/angel/main/resources/screenshot2.png)
-# Available sites
+# 3.Build & Test
+* go build -ldflags "-s -w" ./cmd/ange
+* go test ./...
+# 4.Available sites
 | No |      site     |             url             | status |
 |:--:|:-------------:|:---------------------------:|:------:|
 |  1 |    ttobogo    | https://ttobogo.net         |    O   |
@@ -12,10 +13,9 @@
 |  3 |     tshare    | https://tshare.org          |       |
 |  4 | torrentmobile | https://torrentmobile15.com |    O   |
 |  5 | torrentview   | https://torrentview28.com  |    O   |
-# Build & Test
-* go build -ldflags "-s -w" ./cmd/ange
-* go test ./...
-# Reference
+# 5.Screenshot
+![alt tag](https://raw.githubusercontent.com/daite/angel/main/resources/screenshot2.png)
+# 6.Reference
 * [cli](https://github.com/urfave/cli/blob/master/docs/v2/manual.md)
 * [css selector](https://www.w3schools.com/cssref/css_selectors.asp)
 * [tablewriter](https://github.com/olekukonko/tablewriter)
