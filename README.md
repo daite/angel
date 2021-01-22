@@ -31,5 +31,5 @@
 * [go sync map to map](https://stackoverflow.com/questions/58995416/how-to-pretty-print-the-contents-of-a-sync-map)
 * [go race detector](https://golang.org/doc/articles/race_detector.html)
 * [go 언어 실전 테크닉](http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9791161750262&orderClick=LAG&Kc=)
-# 7. Next
+# 8.Next
 * [AV 작품 검색](https://setflix.co.kr/service/actor/view.asp?pk=3925)
