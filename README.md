@@ -13,8 +13,8 @@
 |  4 | torrentmobile | https://torrentmobile15.com |    O   |
 |  5 | torrentview   | https://torrentview28.com  |    O   |
 # Build & Test
-> go build -ldflags "-s -w" ./cmd/ange
-> go test ./...
+* go build -ldflags "-s -w" ./cmd/ange
+* go test ./...
 # Reference
 * [cli](https://github.com/urfave/cli/blob/master/docs/v2/manual.md)
 * [css selector](https://www.w3schools.com/cssref/css_selectors.asp)
