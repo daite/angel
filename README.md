@@ -1,6 +1,8 @@
 # What's this?
 > search torrent magnet file
-## available sites
+# screenshot
+![alt tag](https://raw.githubusercontent.com/daite/angel/main/resources/screenshot.png)
+# available sites
 | No |      site     |             url             | status |
 |:--:|:-------------:|:---------------------------:|:------:|
 |  1 |    ttobogo    | https://ttobogo.net         |    O   |
