@@ -16,7 +16,9 @@
 |  5 | torrentview   | https://torrentview28.com  |    O   |
 # 5.Screenshot
 ![alt tag](https://raw.githubusercontent.com/daite/angel/main/resources/screenshot2.png)
-# 6.Reference
+# 6.Idea
+![alt tag](https://raw.githubusercontent.com/daite/angel/main/resources/idea.png)
+# 7.Reference
 * [cli](https://github.com/urfave/cli/blob/master/docs/v2/manual.md)
 * [css selector](https://www.w3schools.com/cssref/css_selectors.asp)
 * [tablewriter](https://github.com/olekukonko/tablewriter)
