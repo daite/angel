@@ -28,4 +28,4 @@
 * [go binary size reduce](https://stackoverflow.com/questions/3861634/how-to-reduce-compiled-file-size)
 * [go sync map to map](https://stackoverflow.com/questions/58995416/how-to-pretty-print-the-contents-of-a-sync-map)
 * [go race detector](https://golang.org/doc/articles/race_detector.html)
-
+* [go 언어 실전 테크닉](http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9791161750262&orderClick=LAG&Kc=)
