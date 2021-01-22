@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.com/daite/angel.svg?branch=main)](https://travis-ci.com/daite/angel)
 # 1.What's this?
 > Search torrent magnet
 # 2.Purpose
