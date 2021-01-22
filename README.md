@@ -1,5 +1,7 @@
 # What's this?
-> search torrent magnet file
+> search torrent magnet
+# Purpose
+> To search torrent magnets in korea torrent sites without terrible Ads!! 
 # Screenshot
 ![alt tag](https://raw.githubusercontent.com/daite/angel/main/resources/screenshot.png)
 # Available sites
