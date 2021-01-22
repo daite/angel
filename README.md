@@ -1,5 +1,5 @@
 # What's this?
-> search torrent magnet
+> Search torrent magnet
 # Purpose
 > To search torrent magnets in korea torrent sites without terrible Ads!! 
 # Screenshot
