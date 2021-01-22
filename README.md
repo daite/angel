@@ -33,3 +33,5 @@
 * [go 언어 실전 테크닉](http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9791161750262&orderClick=LAG&Kc=)
 # 8.Next
 * [AV 작품 검색](https://setflix.co.kr/service/actor/view.asp?pk=3925)
+# 9.Warning
+> If torrent sites are out of service, this program won't work properly. (Don't worry I will add other sites!!!)
