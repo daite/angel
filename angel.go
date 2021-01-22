@@ -258,5 +258,6 @@ func (t *TorrentTube) Crawl(keyword string) map[string]string {
 		magnet := "magnet:?xt=urn:btih:" + d["hs"].(string)
 		m[title] = magnet
 	}
+	t.ScrapedData = m
 	return m
 }
