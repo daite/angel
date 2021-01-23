@@ -13,7 +13,7 @@
 |:--:|:-------------:|:---------------------------:|:------:|
 |  1 |    ttobogo    | https://ttobogo.net         |    O   |
 |  2 |   torrentube  | https://torrentube.to       |     O  |
-|  3 |     tshare    | https://tshare.org          |       |
+|  3 |     tshare    | https://tshare.org          |     O  |
 |  4 | torrentmobile | https://torrentmobile15.com |    O   |
 |  5 | torrentview   | https://torrentview28.com  |    O   |
 # 5.Screenshot
