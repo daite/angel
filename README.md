@@ -5,7 +5,7 @@
 # 2.Purpose
 > To search torrent magnets in korea torrent sites without terrible Ads!! 
 # 3.Build & Test
-* go build -ldflags "-s -w" ./cmd/ange
+* go build -ldflags "-s -w" ./cmd/angel
 * go test ./...
 # 4.Available sites
 | No |      site     |             url             | status |
