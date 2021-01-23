@@ -8,6 +8,7 @@ import (
 	"sort"
 	"strings"
 	"sync"
+	"time"
 
 	"github.com/olekukonko/tablewriter"
 )
@@ -15,7 +16,7 @@ import (
 // variable for scraping
 var (
 	TTOBoGoURL       = "https://ttobogo.net"
-	TorrentMobileURL = "https://torrentmobile15.com"
+	TorrentMobileURL = "https://torrentmobile16.com"
 	TorrentViewURL   = "https://torrentview29.com"
 	TorrentTubeURL   = "https://torrentube.to"
 	UserAgent        = "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_1_0)"
@@ -101,4 +102,19 @@ func urlJoin(baseURL string, relURL string) string {
 		log.Fatal(err)
 	}
 	return base.ResolveReference(u).String()
+}
+
+// CheckNetWorkFromURL function checks network status
+func CheckNetWorkFromURL(url string) bool {
+	client := &http.Client{Timeout: 3 * time.Second}
+	req, err := http.NewRequest("GET", url, nil)
+	if err != nil {
+		return false
+	}
+	req.Header.Set("User-Agent", UserAgent)
+	resp, err := client.Do(req)
+	if resp.StatusCode != 200 {
+		return false
+	}
+	return true
 }
