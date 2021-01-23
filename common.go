@@ -19,6 +19,7 @@ var (
 	TorrentMobileURL = "https://torrentmobile16.com"
 	TorrentViewURL   = "https://torrentview29.com"
 	TorrentTubeURL   = "https://torrentube.to"
+	TShareURL        = "https://tshare.org/"
 	UserAgent        = "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_1_0)"
 )
 

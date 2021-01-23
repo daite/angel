@@ -27,11 +27,13 @@ func main() {
 				Usage:   "search torrent magnet file",
 				Action: func(c *cli.Context) error {
 					keyword := c.Args().First()
-					tb := angel.TToBoGo{}
-					tv := angel.TorrentView{}
-					tm := angel.TorrentMobile{}
-					tt := angel.TorrentTube{}
-					s := []angel.Scraping{&tb, &tv, &tm, &tt}
+					s := []angel.Scraping{
+						&angel.TToBoGo{},
+						&angel.TorrentView{},
+						&angel.TorrentMobile{},
+						&angel.TorrentTube{},
+						&angel.TShare{},
+					}
 					data := angel.CollectData(s, keyword)
 					angel.PrintData(data, false)
 					return nil
