@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.com/daite/angel.svg?branch=main)](https://travis-ci.com/daite/angel)
 ![example workflow name](https://github.com/daite/angel/workflows/Go/badge.svg)
+[![codecov](https://codecov.io/gh/daite/angel/branch/main/graph/badge.svg?token=BLF2OUSOBO)](https://codecov.io/gh/daite/angel)
 # 1.What's this?
 > Search torrent magnet
 # 2.Purpose
