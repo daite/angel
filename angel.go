@@ -219,8 +219,7 @@ func (t *TorrentView) GetMagnet(url string) string {
 	return magnet
 }
 
-// TorrentTube struct is for TorrentView torrent web site
-// It is exactly the same with torrentmobile
+// TorrentTube struct is for TorrentTube torrent web site
 type TorrentTube struct {
 	Keyword     string
 	SearchURL   string
