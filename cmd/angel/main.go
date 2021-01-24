@@ -4,7 +4,8 @@ import (
 	"log"
 	"os"
 
-	"github.com/daite/angel/sites"
+	"github.com/daite/angel/common"
+	"github.com/daite/angel/ktorrent"
 	"github.com/urfave/cli/v2"
 )
 
@@ -27,16 +28,15 @@ func main() {
 				Usage:   "search torrent magnet file",
 				Action: func(c *cli.Context) error {
 					keyword := c.Args().First()
-					s := []sites.Scraping{
-						&sites.TToBoGo{},
-						&sites.TorrentView{},
-						&sites.TorrentMobile{},
-						&sites.TorrentTube{},
-						&sites.TShare{},
-						&sites.Nyaa{},
+					s := []common.Scraping{
+						&ktorrent.TToBoGo{},
+						&ktorrent.TorrentView{},
+						&ktorrent.TorrentMobile{},
+						&ktorrent.TorrentTube{},
+						&ktorrent.TShare{},
 					}
-					data := sites.CollectData(s, keyword)
-					sites.PrintData(data, false)
+					data := common.CollectData(s, keyword)
+					common.PrintData(data, false)
 					return nil
 				},
 			},
