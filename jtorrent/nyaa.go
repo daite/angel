@@ -48,8 +48,7 @@ type Nyaa struct {
 // initialize method set keyword and URL based on default url
 func (n *Nyaa) initialize(keyword string) {
 	n.Keyword = keyword
-	// live action - Raw only
-	n.SearchURL = common.TorrentURL["nyaa"] + "/?f=0&c=4_4&q=" + keyword
+	n.SearchURL = common.TorrentURL["nyaa"] + "/?f=0&c=0_0&q=" + keyword
 }
 
 // Crawl torrent data from web site
