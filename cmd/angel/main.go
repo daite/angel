@@ -42,7 +42,7 @@ func main() {
 					&ktorrent.TorrentTube{},
 					&ktorrent.TShare{},
 				}
-				s = common.GetAvailableSites(s)
+				s = common.GetAvailableSites(s, "kr")
 				data := common.CollectData(s, keyword)
 				common.PrintData(data, false)
 			} else {
@@ -50,6 +50,7 @@ func main() {
 					&jtorrent.Nyaa{},
 					&jtorrent.SuKeBe{},
 				}
+				s = common.GetAvailableSites(s, "jp")
 				data := common.CollectData(s, keyword)
 				common.PrintData(data, false)
 			}

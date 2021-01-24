@@ -135,11 +135,16 @@ func CheckNetWorkFromURL(url string) bool {
 }
 
 // GetAvailableSites function gets available torrent sites
-func GetAvailableSites(oldItems []Scraping) []Scraping {
+func GetAvailableSites(oldItems []Scraping, country string) []Scraping {
 	fmt.Println("[*] Getting available torrent sites")
 	newItems := make([]Scraping, 0)
 	val := []int{}
-	items := []string{"ttobogo", "torrentview", "torrentmobile", "torrenttube", "tshare"}
+	items := []string{}
+	if country == "kr" {
+		items = []string{"ttobogo", "torrentview", "torrentmobile", "torrenttube", "tshare"}
+	} else {
+		items = []string{"nyaa", "sukebe"}
+	}
 	for n, title := range items {
 		ok := CheckNetWorkFromURL(TorrentURL[title])
 		if ok {
