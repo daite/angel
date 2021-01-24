@@ -17,10 +17,10 @@ type TShare struct {
 	ScrapedData *sync.Map
 }
 
-// initialize method set keyword and URL based on default url
+// Initialize method set keyword and URL based on default url
 func (t *TShare) initialize(keyword string) {
 	t.Keyword = keyword
-	t.SearchURL = common.TShareURL + "/bbs/search.php?sfl=wr_content&stx=" + keyword
+	t.SearchURL = common.TorrentURL["tshare"] + "/bbs/search.php?sfl=wr_content&stx=" + keyword
 }
 
 // Crawl torrent data from web site

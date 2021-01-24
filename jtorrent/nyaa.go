@@ -49,7 +49,7 @@ type Nyaa struct {
 func (n *Nyaa) initialize(keyword string) {
 	n.Keyword = keyword
 	// live action - Raw only
-	n.SearchURL = common.NyaaURL + "/?f=0&c=4_4&q=" + keyword
+	n.SearchURL = common.TorrentURL["nyaa"] + "/?f=0&c=4_4&q=" + keyword
 }
 
 // Crawl torrent data from web site
@@ -70,7 +70,7 @@ func (n *Nyaa) getData(url string) map[string]string {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	go create(doc, common.NyaaURL)
+	go create(doc, common.TorrentURL["nyaa"])
 	n.makeWP(5)
 	m := make(map[string]string, 0)
 	for d := range data {

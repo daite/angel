@@ -21,7 +21,7 @@ type TorrentView struct {
 // initialize method set keyword and URL based on default url
 func (t *TorrentView) initialize(keyword string) {
 	t.Keyword = keyword
-	t.SearchURL = common.TorrentViewURL + "/bbs/search.php?&stx=" + keyword
+	t.SearchURL = common.TorrentURL["torrentview"] + "/bbs/search.php?&stx=" + keyword
 }
 
 // Crawl torrent data from web site
@@ -54,7 +54,7 @@ func (t *TorrentView) getData(url string) *sync.Map {
 			defer wg.Done()
 			title := strings.TrimSpace(s.Text())
 			link, _ := s.Attr("href")
-			link = strings.TrimSpace(common.URLJoin(common.TorrentViewURL, link))
+			link = strings.TrimSpace(common.URLJoin(common.TorrentURL["torrentview"], link))
 			m.Store(title, t.GetMagnet(link))
 		}()
 	})

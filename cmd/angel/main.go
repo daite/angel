@@ -30,7 +30,7 @@ func main() {
 			},
 		},
 		Action: func(c *cli.Context) error {
-			keyword := ""
+			keyword := "동상이몽2"
 			if c.NArg() > 0 {
 				keyword = c.Args().Get(0)
 			}
@@ -42,6 +42,7 @@ func main() {
 					&ktorrent.TorrentTube{},
 					&ktorrent.TShare{},
 				}
+				s = common.GetAvailableSites(s)
 				data := common.CollectData(s, keyword)
 				common.PrintData(data, false)
 			} else {
@@ -60,13 +61,3 @@ func main() {
 		log.Fatal(err)
 	}
 }
-
-// &cli.StringFlag{
-// 	Name:    "jt",
-// 	Aliases: []string{"j"},
-// // 	Usage:   "search keyword for japan torrent sites",
-// 	Action: func(c *cli.Context) error {
-// 		if c.NArg() > 0 {
-// 		  name = c.Args().Get(0)
-// 		}
-// 		return nil

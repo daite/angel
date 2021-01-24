@@ -21,7 +21,7 @@ type TorrentTube struct {
 // initialize method set keyword and URL based on default url
 func (t *TorrentTube) initialize(keyword string) {
 	t.Keyword = keyword
-	t.SearchURL = common.TorrentTubeURL + "/kt/search?p&q=" + keyword
+	t.SearchURL = common.TorrentURL["torrenttube"] + "/kt/search?p&q=" + keyword
 }
 
 // Crawl torrent data from web site

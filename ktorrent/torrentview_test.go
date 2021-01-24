@@ -20,7 +20,7 @@ func TestTorrentViewCrawlFunc(t *testing.T) {
 
 func TestTorrentViewMagnetFunc(t *testing.T) {
 	tv := TorrentView{}
-	bbsURL := common.TorrentViewURL + "/bbs/board.php?bo_table=mov&wr_id=17725"
+	bbsURL := common.TorrentURL["torrentview"] + "/bbs/board.php?bo_table=mov&wr_id=17725"
 	got := tv.GetMagnet(bbsURL)
 	want := "magnet:?xt=urn:btih:baeffe526ecb61e2e774b2e460a5bdddf3f1e195"
 	if got != want {

@@ -20,7 +20,7 @@ func TestTorrentMobileCrawlFunc(t *testing.T) {
 
 func TestTorrentMobileMagnetFunc(t *testing.T) {
 	tmb := TorrentMobile{}
-	bbsURL := common.TorrentMobileURL + "/bbs/board.php?bo_table=movie&wr_id=17220"
+	bbsURL := common.TorrentURL["torrentmobile"] + "/bbs/board.php?bo_table=movie&wr_id=17220"
 	got := tmb.GetMagnet(bbsURL)
 	want := "magnet:?xt=urn:btih:baeffe526ecb61e2e774b2e460a5bdddf3f1e195"
 	if got != want {

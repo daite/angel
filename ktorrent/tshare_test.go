@@ -20,7 +20,7 @@ func TestTShareCrawlFunc(t *testing.T) {
 
 func TestTShareMagnetFunc(t *testing.T) {
 	ts := TShare{}
-	bbsURL := common.TShareURL + "/movie/11457"
+	bbsURL := common.TorrentURL["tshare"] + "/movie/11457"
 	got := ts.GetMagnet(bbsURL)
 	want := "magnet:?xt=urn:btih:890ef99f886552c2f7d6b1b237509856dc063803"
 	if got != want {

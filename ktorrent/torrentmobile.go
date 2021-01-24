@@ -20,7 +20,7 @@ type TorrentMobile struct {
 // initialize method set keyword and URL based on default url
 func (t *TorrentMobile) initialize(keyword string) {
 	t.Keyword = keyword
-	t.SearchURL = common.TorrentMobileURL + "/bbs/search.php?&stx=" + keyword
+	t.SearchURL = common.TorrentURL["torrentmobile"] + "/bbs/search.php?&stx=" + keyword
 }
 
 // Crawl torrent data from web site
@@ -53,7 +53,7 @@ func (t *TorrentMobile) getData(url string) *sync.Map {
 			defer wg.Done()
 			title := strings.TrimSpace(s.Text())
 			link, _ := s.Attr("href")
-			link = strings.TrimSpace(common.URLJoin(common.TorrentMobileURL, link))
+			link = strings.TrimSpace(common.URLJoin(common.TorrentURL["torrentmobile"], link))
 			m.Store(title, t.GetMagnet(link))
 		}()
 	})

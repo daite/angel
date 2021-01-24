@@ -1,6 +1,7 @@
 package common
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"net/url"
@@ -20,14 +21,16 @@ type Scraping interface {
 
 // variable for scraping
 var (
-	TTOBoGoURL       = "https://ttobogo.net"
-	TorrentMobileURL = "https://torrentmobile16.com"
-	TorrentViewURL   = "https://torrentview29.com"
-	TorrentTubeURL   = "https://torrentube.to"
-	TShareURL        = "https://tshare.org"
-	NyaaURL          = "https://nyaa.si"
-	SuKeBeURL        = "https://sukebei.nyaa.si"
-	UserAgent        = "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_1_0)"
+	TorrentURL = map[string]string{
+		"ttobogo":       "https://ttobogo.net",
+		"torrentmobile": "https://torrentmobile16.com",
+		"torrentview":   "https://torrentview29.com",
+		"torrenttube":   "https://torrentube.to",
+		"tshare":        "https://tshare.org",
+		"nyaa":          "https://nyaa.si",
+		"sukebe":        "https://sukebei.nyaa.si",
+	}
+	UserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_1_0)"
 )
 
 // GetResponseFromURL returns *http.Response from url
@@ -121,8 +124,30 @@ func CheckNetWorkFromURL(url string) bool {
 	}
 	req.Header.Set("User-Agent", UserAgent)
 	resp, err := client.Do(req)
+	if err != nil {
+		return false
+	}
+	defer resp.Body.Close()
 	if resp.StatusCode != 200 {
 		return false
 	}
 	return true
+}
+
+// GetAvailableSites function gets available torrent sites
+func GetAvailableSites(oldItems []Scraping) []Scraping {
+	fmt.Println("[*] Getting available torrent sites")
+	newItems := make([]Scraping, 0)
+	val := []int{}
+	items := []string{"ttobogo", "torrentview", "torrentmobile", "torrenttube", "tshare"}
+	for n, title := range items {
+		ok := CheckNetWorkFromURL(TorrentURL[title])
+		if ok {
+			val = append(val, n)
+		}
+	}
+	for _, v := range val {
+		newItems = append(newItems, oldItems[v])
+	}
+	return newItems
 }

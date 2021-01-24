@@ -20,7 +20,7 @@ func TestTToBoGoCrawlFunc(t *testing.T) {
 
 func TestTToBoGoGetMagnetFunc(t *testing.T) {
 	tbg := TToBoGo{}
-	bbsURL := common.TTOBoGoURL + "/post/150327"
+	bbsURL := common.TorrentURL["ttobogo"] + "/post/150327"
 	got := tbg.GetMagnet(bbsURL)
 	want := "magnet:?xt=urn:btih:167f61c08c130b4e9ddff003af81ecb6177c47b8"
 	if got != want {

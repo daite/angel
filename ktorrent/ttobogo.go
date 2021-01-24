@@ -20,7 +20,7 @@ type TToBoGo struct {
 // initialize method set keyword and URL based on default url
 func (t *TToBoGo) initialize(keyword string) {
 	t.Keyword = keyword
-	t.SearchURL = common.TTOBoGoURL + "/search?skeyword=" + keyword
+	t.SearchURL = common.TorrentURL["ttobogo"] + "/search?skeyword=" + keyword
 }
 
 // Crawl torrent data from web site

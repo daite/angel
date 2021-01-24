@@ -48,7 +48,7 @@ type SuKeBe struct {
 // initialize method set keyword and URL based on default url
 func (s *SuKeBe) initialize(keyword string) {
 	s.Keyword = keyword
-	s.SearchURL = common.SuKeBeURL + "/?f=0&c=0_0&q=" + keyword
+	s.SearchURL = common.TorrentURL["sukebe"] + "/?f=0&c=0_0&q=" + keyword
 }
 
 // Crawl torrent data from web site
@@ -69,11 +69,14 @@ func (s *SuKeBe) getData(url string) map[string]string {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	go screate(doc, common.SuKeBeURL)
+	go screate(doc, common.TorrentURL["sukebe"])
 	s.makeWP(5)
 	m := make(map[string]string, 0)
 	for d := range sdata {
-		title := d.title[:40]
+		title := d.title
+		if len(title) > 40 {
+			title = title[:40]
+		}
 		m[title] = d.magnet
 	}
 	s.ScrapedData = m
