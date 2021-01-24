@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/daite/angel/common"
+	"github.com/daite/angel/jtorrent"
 	"github.com/daite/angel/ktorrent"
 	"github.com/urfave/cli/v2"
 )
@@ -21,25 +22,37 @@ func main() {
 		Name:    "angel",
 		Usage:   "search torrent magnet!",
 		Version: version,
-		Commands: []*cli.Command{
-			{
-				Name:    "search",
-				Aliases: []string{"s"},
-				Usage:   "search torrent magnet file",
-				Action: func(c *cli.Context) error {
-					keyword := c.Args().First()
-					s := []common.Scraping{
-						&ktorrent.TToBoGo{},
-						&ktorrent.TorrentView{},
-						&ktorrent.TorrentMobile{},
-						&ktorrent.TorrentTube{},
-						&ktorrent.TShare{},
-					}
-					data := common.CollectData(s, keyword)
-					common.PrintData(data, false)
-					return nil
-				},
+		Flags: []cli.Flag{
+			&cli.StringFlag{
+				Name:    "lang",
+				Aliases: []string{"l"},
+				Usage:   "choose torrent sites (kr or jp)",
 			},
+		},
+		Action: func(c *cli.Context) error {
+			keyword := ""
+			if c.NArg() > 0 {
+				keyword = c.Args().Get(0)
+			}
+			if c.String("lang") == "kr" {
+				s := []common.Scraping{
+					&ktorrent.TToBoGo{},
+					&ktorrent.TorrentView{},
+					&ktorrent.TorrentMobile{},
+					&ktorrent.TorrentTube{},
+					&ktorrent.TShare{},
+				}
+				data := common.CollectData(s, keyword)
+				common.PrintData(data, false)
+			} else {
+				s := []common.Scraping{
+					&jtorrent.Nyaa{},
+					&jtorrent.SuKeBe{},
+				}
+				data := common.CollectData(s, keyword)
+				common.PrintData(data, false)
+			}
+			return nil
 		},
 	}
 	err := app.Run(os.Args)
@@ -47,3 +60,13 @@ func main() {
 		log.Fatal(err)
 	}
 }
+
+// &cli.StringFlag{
+// 	Name:    "jt",
+// 	Aliases: []string{"j"},
+// // 	Usage:   "search keyword for japan torrent sites",
+// 	Action: func(c *cli.Context) error {
+// 		if c.NArg() > 0 {
+// 		  name = c.Args().Get(0)
+// 		}
+// 		return nil

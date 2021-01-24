@@ -26,6 +26,7 @@ var (
 	TorrentTubeURL   = "https://torrentube.to"
 	TShareURL        = "https://tshare.org"
 	NyaaURL          = "https://nyaa.si"
+	SuKeBeURL        = "https://sukebei.nyaa.si"
 	UserAgent        = "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_1_0)"
 )
 
