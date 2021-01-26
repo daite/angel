@@ -40,6 +40,7 @@
 * [regex square blanket](https://stackoverflow.com/questions/928072/whats-the-regular-expression-that-matches-a-square-bracket)
 * [online regex](https://regex101.com/)
 * [codecoverage](https://codecov.io/gh/daite/)
+* [cross compile](https://www.digitalocean.com/community/tutorials/how-to-build-go-executables-for-multiple-platforms-on-ubuntu-16-04)
 # 8.Next
 * [AV 작품 검색](https://setflix.co.kr/service/actor/view.asp?pk=3925)
 # 9.Warning
