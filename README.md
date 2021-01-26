@@ -18,11 +18,9 @@
 |  5 | torrentview   | https://torrentview28.com  |    O   |
 |  6 | nyaa          | https://nyaa.si            |    O   |
 |  7 | sukebei       | https://sukebei.nyaa.si    |    O   |
-# 5.Screenshot
-![alt tag](https://raw.githubusercontent.com/daite/angel/main/resources/screenshot2.png)
-# 6.Idea
+# 5.Idea
 ![alt tag](https://raw.githubusercontent.com/daite/angel/main/resources/idea.png)
-# 7.Reference
+# 6.Reference
 * [cli](https://github.com/urfave/cli/blob/master/docs/v2/manual.md)
 * [css selector](https://www.w3schools.com/cssref/css_selectors.asp)
 * [tablewriter](https://github.com/olekukonko/tablewriter)
@@ -41,7 +39,7 @@
 * [online regex](https://regex101.com/)
 * [codecoverage](https://codecov.io/gh/daite/)
 * [cross compile](https://www.digitalocean.com/community/tutorials/how-to-build-go-executables-for-multiple-platforms-on-ubuntu-16-04)
-# 8.Next
+# 7.Next
 * [AV 작품 검색](https://setflix.co.kr/service/actor/view.asp?pk=3925)
-# 9.Warning
+# 8.Warning
 > If torrent sites are out of service, this program won't work properly. (Don't worry I will add other sites!!!)
