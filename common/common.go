@@ -29,6 +29,7 @@ var (
 		"tshare":        "https://tshare.org",
 		"nyaa":          "https://nyaa.si",
 		"sukebe":        "https://sukebei.nyaa.si",
+		"torrentsir":    "https://torrentsir31.com",
 	}
 	UserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_1_0)"
 )
