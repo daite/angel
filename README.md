@@ -16,8 +16,9 @@
 |  3 |     tshare    | https://tshare.org          |     O  |
 |  4 | torrentmobile | https://torrentmobile15.com |    O   |
 |  5 | torrentview   | https://torrentview28.com  |    O   |
-|  6 | nyaa          | https://nyaa.si            |    O   |
-|  7 | sukebei       | https://sukebei.nyaa.si    |    O   |
+|  6 | torrentsir   | https://torrentsir31.com |    O   |
+|  7 | nyaa          | https://nyaa.si            |    O   |
+|  8 | sukebei       | https://sukebei.nyaa.si    |    O   |
 # 5.Idea
 ![alt tag](https://raw.githubusercontent.com/daite/angel/main/resources/idea.png)
 # 6.Reference
