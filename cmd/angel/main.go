@@ -44,7 +44,7 @@ func main() {
 				}
 				s = common.GetAvailableSites(s, "kr")
 				data := common.CollectData(s, keyword)
-				common.PrintData(data, false)
+				common.PrintData(data)
 			} else {
 				s := []common.Scraping{
 					&jtorrent.Nyaa{},
@@ -52,7 +52,7 @@ func main() {
 				}
 				s = common.GetAvailableSites(s, "jp")
 				data := common.CollectData(s, keyword)
-				common.PrintData(data, false)
+				common.PrintData(data)
 			}
 			return nil
 		},

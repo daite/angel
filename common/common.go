@@ -76,25 +76,14 @@ func CollectData(s []Scraping, keyword string) map[string]string {
 }
 
 // PrintData function prints scraped data to console
-func PrintData(data map[string]string, reverse bool) {
+func PrintData(data map[string]string) {
 	table := tablewriter.NewWriter(os.Stdout)
 	table.SetHeader([]string{"Title", "Magnet"})
 	matrix := [][]string{}
 	for k, v := range data {
 		matrix = append(matrix, []string{k, v})
 	}
-	sort.Slice(matrix[:], func(i, j int) bool {
-		for x := range matrix[i] {
-			if matrix[i][x] == matrix[j][x] {
-				continue
-			}
-			if reverse == true {
-				return matrix[i][x] < matrix[j][x]
-			}
-			return matrix[i][x] > matrix[j][x]
-		}
-		return false
-	})
+	sort.SliceStable(matrix, func(i, j int) bool { return matrix[i][0] > matrix[j][0] })
 	for _, v := range matrix {
 		table.Append(v)
 	}
