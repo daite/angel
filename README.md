@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.com/daite/angel.svg?branch=main)](https://travis-ci.com/daite/angel)
 ![example workflow name](https://github.com/daite/angel/workflows/Go/badge.svg)
 [![codecov](https://codecov.io/gh/daite/angel/branch/main/graph/badge.svg?token=BLF2OUSOBO)](https://codecov.io/gh/daite/angel)
-# 1.Available sites
+# 1. Torrent sites
 | No |      site     |             url             | status |
 |:--:|:-------------:|:---------------------------:|:------:|
 |  1 |    ttobogo    | https://ttobogo.net         |    O   |
@@ -12,7 +12,7 @@
 |  6 | torrentsir   | https://torrentsir31.com |    O   |
 |  7 | nyaa          | https://nyaa.si            |    O   |
 |  8 | sukebei       | https://sukebei.nyaa.si    |    O   |
-# 2.Reference
+# 2. Reference
 * [cli](https://github.com/urfave/cli/blob/master/docs/v2/manual.md)
 * [css selector](https://www.w3schools.com/cssref/css_selectors.asp)
 * [tablewriter](https://github.com/olekukonko/tablewriter)
