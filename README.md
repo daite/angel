@@ -1,14 +1,7 @@
 [![Build Status](https://travis-ci.com/daite/angel.svg?branch=main)](https://travis-ci.com/daite/angel)
 ![example workflow name](https://github.com/daite/angel/workflows/Go/badge.svg)
 [![codecov](https://codecov.io/gh/daite/angel/branch/main/graph/badge.svg?token=BLF2OUSOBO)](https://codecov.io/gh/daite/angel)
-# 1.What's this?
-> Search torrent magnet
-# 2.Purpose
-> To search torrent magnets in korea torrent sites without terrible Ads!! 
-# 3.Build & Test
-* go build -ldflags "-s -w" ./cmd/angel
-* go test ./...
-# 4.Available sites
+# 1.Available sites
 | No |      site     |             url             | status |
 |:--:|:-------------:|:---------------------------:|:------:|
 |  1 |    ttobogo    | https://ttobogo.net         |    O   |
@@ -19,9 +12,7 @@
 |  6 | torrentsir   | https://torrentsir31.com |    O   |
 |  7 | nyaa          | https://nyaa.si            |    O   |
 |  8 | sukebei       | https://sukebei.nyaa.si    |    O   |
-# 5.Idea
-![alt tag](https://raw.githubusercontent.com/daite/angel/main/resources/idea.png)
-# 6.Reference
+# 2.Reference
 * [cli](https://github.com/urfave/cli/blob/master/docs/v2/manual.md)
 * [css selector](https://www.w3schools.com/cssref/css_selectors.asp)
 * [tablewriter](https://github.com/olekukonko/tablewriter)
@@ -40,7 +31,3 @@
 * [online regex](https://regex101.com/)
 * [codecoverage](https://codecov.io/gh/daite/)
 * [cross compile](https://www.digitalocean.com/community/tutorials/how-to-build-go-executables-for-multiple-platforms-on-ubuntu-16-04)
-# 7.Next
-* [AV 작품 검색](https://setflix.co.kr/service/actor/view.asp?pk=3925)
-# 8.Warning
-> If torrent sites are out of service, this program won't work properly. (Don't worry I will add other sites!!!)
