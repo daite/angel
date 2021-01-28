@@ -30,6 +30,7 @@ var (
 		"nyaa":          "https://nyaa.si",
 		"sukebe":        "https://sukebei.nyaa.si",
 		"torrentsir":    "https://torrentsir31.com",
+		"torrentj":      "https://torrentj32.com",
 	}
 	UserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_1_0)"
 )
@@ -130,7 +131,7 @@ func GetAvailableSites(oldItems []Scraping, country string) []Scraping {
 	newItems := make([]Scraping, 0)
 	items := []string{}
 	if country == "kr" {
-		items = []string{"ttobogo", "torrentview", "torrentmobile", "torrenttube", "tshare", "torrentsir"}
+		items = []string{"ttobogo", "torrentview", "torrentmobile", "torrenttube", "tshare", "torrentsir", "torrentj"}
 	} else {
 		items = []string{"nyaa", "sukebe"}
 	}

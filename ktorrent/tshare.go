@@ -12,6 +12,7 @@ import (
 
 // TShare struct is for ttobogo torrent web site
 type TShare struct {
+	Name        string
 	Keyword     string
 	SearchURL   string
 	ScrapedData *sync.Map
@@ -21,12 +22,13 @@ type TShare struct {
 func (t *TShare) initialize(keyword string) {
 	t.Keyword = keyword
 	t.SearchURL = common.TorrentURL["tshare"] + "/bbs/search.php?sfl=wr_content&stx=" + keyword
+	t.Name = "tshare"
 }
 
 // Crawl torrent data from web site
 func (t *TShare) Crawl(keyword string) map[string]string {
-	fmt.Println("[*] TShare starts Crawl!!")
 	t.initialize(keyword)
+	fmt.Printf("[*] %s starts Crawl!!\n", t.Name)
 	data := t.getData(t.SearchURL)
 	m := map[string]string{}
 	data.Range(

@@ -10,8 +10,9 @@ import (
 	"github.com/daite/angel/common"
 )
 
-// TorrentMobile struct is for TorrentMobile torrent web site
-type TorrentMobile struct {
+// TorrentJ struct is for TorrentJ torrent web site
+// It is exactly the same with torrentmobile
+type TorrentJ struct {
 	Name        string
 	Keyword     string
 	SearchURL   string
@@ -19,14 +20,14 @@ type TorrentMobile struct {
 }
 
 // initialize method set keyword and URL based on default url
-func (t *TorrentMobile) initialize(keyword string) {
+func (t *TorrentJ) initialize(keyword string) {
 	t.Keyword = keyword
-	t.SearchURL = common.TorrentURL["torrentmobile"] + "/bbs/search.php?&stx=" + keyword
-	t.Name = "torrentmobile"
+	t.SearchURL = common.TorrentURL["torrentj"] + "/bbs/search.php?&stx=" + keyword
+	t.Name = "torrentj"
 }
 
 // Crawl torrent data from web site
-func (t *TorrentMobile) Crawl(keyword string) map[string]string {
+func (t *TorrentJ) Crawl(keyword string) map[string]string {
 	t.initialize(keyword)
 	fmt.Printf("[*] %s starts Crawl!!\n", t.Name)
 	data := t.getData(t.SearchURL)
@@ -40,7 +41,7 @@ func (t *TorrentMobile) Crawl(keyword string) map[string]string {
 }
 
 // GetData method returns map(title, bbs url)
-func (t *TorrentMobile) getData(url string) *sync.Map {
+func (t *TorrentJ) getData(url string) *sync.Map {
 	var wg sync.WaitGroup
 	m := &sync.Map{}
 	resp := common.GetResponseFromURL(url)
@@ -55,7 +56,7 @@ func (t *TorrentMobile) getData(url string) *sync.Map {
 			defer wg.Done()
 			title := strings.TrimSpace(s.Text())
 			link, _ := s.Attr("href")
-			link = strings.TrimSpace(common.URLJoin(common.TorrentURL["torrentmobile"], link))
+			link = strings.TrimSpace(common.URLJoin(common.TorrentURL["torrentj"], link))
 			m.Store(title, t.GetMagnet(link))
 		}()
 	})
@@ -65,7 +66,7 @@ func (t *TorrentMobile) getData(url string) *sync.Map {
 }
 
 // GetMagnet method returns torrent magnet
-func (t *TorrentMobile) GetMagnet(url string) string {
+func (t *TorrentJ) GetMagnet(url string) string {
 	resp := common.GetResponseFromURL(url)
 	defer resp.Body.Close()
 	doc, err := goquery.NewDocumentFromResponse(resp)

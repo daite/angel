@@ -12,6 +12,7 @@ import (
 
 // TToBoGo struct is for ttobogo torrent web site
 type TToBoGo struct {
+	Name        string
 	Keyword     string
 	SearchURL   string
 	ScrapedData *sync.Map
@@ -21,12 +22,13 @@ type TToBoGo struct {
 func (t *TToBoGo) initialize(keyword string) {
 	t.Keyword = keyword
 	t.SearchURL = common.TorrentURL["ttobogo"] + "/search?skeyword=" + keyword
+	t.Name = "ttobogo"
 }
 
 // Crawl torrent data from web site
 func (t *TToBoGo) Crawl(keyword string) map[string]string {
-	fmt.Println("[*] TToBoGo starts Crawl!!")
 	t.initialize(keyword)
+	fmt.Printf("[*] %s starts Crawl!!\n", t.Name)
 	data := t.getData(t.SearchURL)
 	m := map[string]string{}
 	data.Range(

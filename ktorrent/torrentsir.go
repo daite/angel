@@ -13,6 +13,7 @@ import (
 // TorrentSir struct is for TorrentSir torrent web site
 // It is exactly the same with torrentmobile
 type TorrentSir struct {
+	Name        string
 	Keyword     string
 	SearchURL   string
 	ScrapedData *sync.Map
@@ -22,12 +23,13 @@ type TorrentSir struct {
 func (t *TorrentSir) initialize(keyword string) {
 	t.Keyword = keyword
 	t.SearchURL = common.TorrentURL["torrentsir"] + "/bbs/search.php?&stx=" + keyword
+	t.Name = "torrentsir"
 }
 
 // Crawl torrent data from web site
 func (t *TorrentSir) Crawl(keyword string) map[string]string {
-	fmt.Println("[*] TorrentSir starts Crawl!!")
 	t.initialize(keyword)
+	fmt.Printf("[*] %s starts Crawl!!\n", t.Name)
 	data := t.getData(t.SearchURL)
 	m := map[string]string{}
 	data.Range(

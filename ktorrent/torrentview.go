@@ -13,6 +13,7 @@ import (
 // TorrentView struct is for TorrentView torrent web site
 // It is exactly the same with torrentmobile
 type TorrentView struct {
+	Name        string
 	Keyword     string
 	SearchURL   string
 	ScrapedData *sync.Map
@@ -22,12 +23,13 @@ type TorrentView struct {
 func (t *TorrentView) initialize(keyword string) {
 	t.Keyword = keyword
 	t.SearchURL = common.TorrentURL["torrentview"] + "/bbs/search.php?&stx=" + keyword
+	t.Name = "torrentview"
 }
 
 // Crawl torrent data from web site
 func (t *TorrentView) Crawl(keyword string) map[string]string {
-	fmt.Println("[*] TorrentView starts Crawl!!")
 	t.initialize(keyword)
+	fmt.Printf("[*] %s starts Crawl!!\n", t.Name)
 	data := t.getData(t.SearchURL)
 	m := map[string]string{}
 	data.Range(

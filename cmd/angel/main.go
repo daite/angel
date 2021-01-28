@@ -42,6 +42,7 @@ func main() {
 					&ktorrent.TorrentTube{},
 					&ktorrent.TShare{},
 					&ktorrent.TorrentSir{},
+					&ktorrent.TorrentJ{},
 				}
 				s = common.GetAvailableSites(s, "kr")
 				data := common.CollectData(s, keyword)

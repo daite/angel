@@ -13,6 +13,7 @@ import (
 
 // TorrentTube struct is for TorrentTube torrent web site
 type TorrentTube struct {
+	Name        string
 	Keyword     string
 	SearchURL   string
 	ScrapedData map[string]string
@@ -22,12 +23,13 @@ type TorrentTube struct {
 func (t *TorrentTube) initialize(keyword string) {
 	t.Keyword = keyword
 	t.SearchURL = common.TorrentURL["torrenttube"] + "/kt/search?p&q=" + keyword
+	t.Name = "torrenttube"
 }
 
 // Crawl torrent data from web site
 func (t *TorrentTube) Crawl(keyword string) map[string]string {
-	fmt.Println("[*] TorrentTube starts Crawl!!")
 	t.initialize(keyword)
+	fmt.Printf("[*] %s starts Crawl!!\n", t.Name)
 	m := map[string]string{}
 	resp := common.GetResponseFromURL(t.SearchURL)
 	defer resp.Body.Close()
