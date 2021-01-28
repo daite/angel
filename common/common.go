@@ -32,7 +32,7 @@ var (
 		"torrentsir":    "https://torrentsir31.com",
 		"torrentj":      "https://torrentj32.com",
 	}
-	UserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_1_0)"
+	UserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_1_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36"
 )
 
 // GetResponseFromURL returns *http.Response from url
