@@ -55,7 +55,7 @@ func GetResponseFromURL(url string) *http.Response {
 // CollectData function executes web scraping based on each scrapper
 func CollectData(s []Scraping, keyword string) map[string]string {
 	var wg sync.WaitGroup
-	ch := make(chan map[string]string, 5)
+	ch := make(chan map[string]string, len(TorrentURL))
 	for _, i := range s {
 		wg.Add(1)
 		go func(v Scraping) {
@@ -128,20 +128,27 @@ func CheckNetWorkFromURL(url string) bool {
 func GetAvailableSites(oldItems []Scraping, country string) []Scraping {
 	fmt.Println("[*] Getting available torrent sites")
 	newItems := make([]Scraping, 0)
-	val := []int{}
 	items := []string{}
 	if country == "kr" {
 		items = []string{"ttobogo", "torrentview", "torrentmobile", "torrenttube", "tshare", "torrentsir"}
 	} else {
 		items = []string{"nyaa", "sukebe"}
 	}
+	ch := make(chan int, len(TorrentURL))
+	var wg sync.WaitGroup
 	for n, title := range items {
-		ok := CheckNetWorkFromURL(TorrentURL[title])
-		if ok {
-			val = append(val, n)
-		}
+		wg.Add(1)
+		go func(i int, t string) {
+			defer wg.Done()
+			ok := CheckNetWorkFromURL(TorrentURL[t])
+			if ok {
+				ch <- i
+			}
+		}(n, title)
 	}
-	for _, v := range val {
+	wg.Wait()
+	close(ch)
+	for v := range ch {
 		newItems = append(newItems, oldItems[v])
 	}
 	return newItems
