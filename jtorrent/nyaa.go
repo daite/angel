@@ -71,7 +71,7 @@ func (n *Nyaa) getData(url string) map[string]string {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	go create(doc, common.TorrentURL["nyaa"])
+	go create(doc, common.TorrentURL[n.Name])
 	n.makeWP(5)
 	m := make(map[string]string, 0)
 	for d := range data {

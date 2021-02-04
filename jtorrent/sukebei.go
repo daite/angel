@@ -71,7 +71,7 @@ func (s *SuKeBe) getData(url string) map[string]string {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	go screate(doc, common.TorrentURL["sukebe"])
+	go screate(doc, common.TorrentURL[s.Name])
 	s.makeWP(5)
 	m := make(map[string]string, 0)
 	for d := range sdata {
