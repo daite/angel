@@ -22,8 +22,8 @@ type TorrentJ struct {
 // initialize method set keyword and URL based on default url
 func (t *TorrentJ) initialize(keyword string) {
 	t.Keyword = keyword
-	t.SearchURL = common.TorrentURL["torrentj"] + "/bbs/search.php?&stx=" + keyword
 	t.Name = "torrentj"
+	t.SearchURL = common.TorrentURL[t.Name] + "/bbs/search.php?&stx=" + keyword
 }
 
 // Crawl torrent data from web site

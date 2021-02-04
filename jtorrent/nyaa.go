@@ -40,6 +40,7 @@ func create(doc *goquery.Document, baseURL string) {
 
 // Nyaa struct is for Nyaa torrent web site
 type Nyaa struct {
+	Name        string
 	Keyword     string
 	SearchURL   string
 	ScrapedData map[string]string
@@ -48,15 +49,16 @@ type Nyaa struct {
 // initialize method set keyword and URL based on default url
 func (n *Nyaa) initialize(keyword string) {
 	n.Keyword = keyword
-	n.SearchURL = common.TorrentURL["nyaa"] + "/?f=0&c=0_0&q=" + keyword
+	n.Name = "nyaa"
+	n.SearchURL = common.TorrentURL[n.Name] + "/?f=0&c=0_0&q=" + keyword
 }
 
 // Crawl torrent data from web site
 // NOTE: status code error: 429 429 Too Many Requests for goroutines
 // Max concurrent request: 5
 func (n *Nyaa) Crawl(keyword string) map[string]string {
-	fmt.Println("[*] Nyaa starts Crawl!!")
 	n.initialize(keyword)
+	fmt.Printf("[*] %s starts Crawl!!\n", n.Name)
 	data := n.getData(n.SearchURL)
 	return data
 }

@@ -40,6 +40,7 @@ func screate(doc *goquery.Document, baseURL string) {
 
 // SuKeBe struct is for sukebei torrent web site
 type SuKeBe struct {
+	Name        string
 	Keyword     string
 	SearchURL   string
 	ScrapedData map[string]string
@@ -48,15 +49,16 @@ type SuKeBe struct {
 // initialize method set keyword and URL based on default url
 func (s *SuKeBe) initialize(keyword string) {
 	s.Keyword = keyword
-	s.SearchURL = common.TorrentURL["sukebe"] + "/?f=0&c=0_0&q=" + keyword
+	s.Name = "sukebe"
+	s.SearchURL = common.TorrentURL[s.Name] + "/?f=0&c=0_0&q=" + keyword
 }
 
 // Crawl torrent data from web site
 // NOTE: status code error: 429 429 Too Many Requests for goroutines
 // Max concurrent request: 5
 func (s *SuKeBe) Crawl(keyword string) map[string]string {
-	fmt.Println("[*] SukeBe starts Crawl!!")
 	s.initialize(keyword)
+	fmt.Printf("[*] %s starts Crawl!!\n", s.Name)
 	data := s.getData(s.SearchURL)
 	return data
 }

@@ -10,9 +10,9 @@ import (
 	"github.com/daite/angel/common"
 )
 
-// TorrentSir struct is for TorrentSir torrent web site
+// TorrentSee struct is for TorrentSee torrent web site
 // It is exactly the same with torrentmobile
-type TorrentSir struct {
+type TorrentSee struct {
 	Name        string
 	Keyword     string
 	SearchURL   string
@@ -20,14 +20,14 @@ type TorrentSir struct {
 }
 
 // initialize method set keyword and URL based on default url
-func (t *TorrentSir) initialize(keyword string) {
+func (t *TorrentSee) initialize(keyword string) {
 	t.Keyword = keyword
-	t.Name = "torrentsir"
-	t.SearchURL = common.TorrentURL[t.Name] + "/bbs/search.php?&stx=" + keyword
+	t.Name = "torrentsee"
+	t.SearchURL = common.TorrentURL[t.Name] + "/search/index?keywords=" + keyword
 }
 
 // Crawl torrent data from web site
-func (t *TorrentSir) Crawl(keyword string) map[string]string {
+func (t *TorrentSee) Crawl(keyword string) map[string]string {
 	t.initialize(keyword)
 	fmt.Printf("[*] %s starts Crawl!!\n", t.Name)
 	data := t.getData(t.SearchURL)
@@ -41,7 +41,7 @@ func (t *TorrentSir) Crawl(keyword string) map[string]string {
 }
 
 // GetData method returns map(title, bbs url)
-func (t *TorrentSir) getData(url string) *sync.Map {
+func (t *TorrentSee) getData(url string) *sync.Map {
 	var wg sync.WaitGroup
 	m := &sync.Map{}
 	resp := common.GetResponseFromURL(url)
@@ -50,13 +50,13 @@ func (t *TorrentSir) getData(url string) *sync.Map {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	doc.Find("div.media-heading a").Each(func(i int, s *goquery.Selection) {
+	doc.Find("li.tit > a").Each(func(i int, s *goquery.Selection) {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
 			title := strings.TrimSpace(s.Text())
 			link, _ := s.Attr("href")
-			link = strings.TrimSpace(common.URLJoin(common.TorrentURL["torrentsir"], link))
+			link = strings.TrimSpace(common.URLJoin(common.TorrentURL["torrentsee"], link))
 			m.Store(title, t.GetMagnet(link))
 		}()
 	})
@@ -66,14 +66,14 @@ func (t *TorrentSir) getData(url string) *sync.Map {
 }
 
 // GetMagnet method returns torrent magnet
-func (t *TorrentSir) GetMagnet(url string) string {
+func (t *TorrentSee) GetMagnet(url string) string {
 	resp := common.GetResponseFromURL(url)
 	defer resp.Body.Close()
 	doc, err := goquery.NewDocumentFromResponse(resp)
 	if err != nil {
 		log.Fatalln(err)
 	}
-	magnet := strings.TrimSpace(doc.Find("ul.list-group").Text())
+	magnet := strings.TrimSpace(doc.Find("tr > td > a[target]").Text())
 	if magnet == "" {
 		return "NO MAGNET"
 	}
