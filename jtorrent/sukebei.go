@@ -3,6 +3,7 @@ package jtorrent
 import (
 	"fmt"
 	"log"
+	"net/url"
 	"strings"
 	"sync"
 
@@ -50,7 +51,7 @@ type SuKeBe struct {
 func (s *SuKeBe) initialize(keyword string) {
 	s.Keyword = keyword
 	s.Name = "sukebe"
-	s.SearchURL = common.TorrentURL[s.Name] + "/?f=0&c=0_0&q=" + keyword
+	s.SearchURL = common.TorrentURL[s.Name] + "/?f=0&c=0_0&q=" + url.QueryEscape(s.Keyword)
 }
 
 // Crawl torrent data from web site

@@ -3,6 +3,7 @@ package jtorrent
 import (
 	"fmt"
 	"log"
+	"net/url"
 	"strings"
 	"sync"
 
@@ -50,7 +51,7 @@ type Nyaa struct {
 func (n *Nyaa) initialize(keyword string) {
 	n.Keyword = keyword
 	n.Name = "nyaa"
-	n.SearchURL = common.TorrentURL[n.Name] + "/?f=0&c=0_0&q=" + keyword
+	n.SearchURL = common.TorrentURL[n.Name] + "/?f=0&c=0_0&q=" + url.QueryEscape(n.Keyword)
 }
 
 // Crawl torrent data from web site
