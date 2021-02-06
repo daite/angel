@@ -3,6 +3,7 @@ package ktorrent
 import (
 	"fmt"
 	"log"
+	"net/url"
 	"strings"
 	"sync"
 
@@ -22,7 +23,7 @@ type TShare struct {
 func (t *TShare) initialize(keyword string) {
 	t.Keyword = keyword
 	t.Name = "tshare"
-	t.SearchURL = common.TorrentURL[t.Name] + "/bbs/search.php?sfl=wr_content&stx=" + keyword
+	t.SearchURL = common.TorrentURL[t.Name] + "/bbs/search.php?sfl=wr_content&stx=" + url.QueryEscape(t.Keyword)
 }
 
 // Crawl torrent data from web site

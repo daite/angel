@@ -3,6 +3,7 @@ package ktorrent
 import (
 	"fmt"
 	"log"
+	"net/url"
 	"strings"
 	"sync"
 
@@ -22,7 +23,7 @@ type TorrentMobile struct {
 func (t *TorrentMobile) initialize(keyword string) {
 	t.Keyword = keyword
 	t.Name = "torrentmobile"
-	t.SearchURL = common.TorrentURL[t.Name] + "/bbs/search.php?&stx=" + keyword
+	t.SearchURL = common.TorrentURL[t.Name] + "/bbs/search.php?&stx=" + url.QueryEscape(t.Keyword)
 }
 
 // Crawl torrent data from web site

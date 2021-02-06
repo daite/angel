@@ -3,6 +3,7 @@ package ktorrent
 import (
 	"fmt"
 	"log"
+	"net/url"
 	"strings"
 	"sync"
 
@@ -22,7 +23,7 @@ type TToBoGo struct {
 func (t *TToBoGo) initialize(keyword string) {
 	t.Keyword = keyword
 	t.Name = "ttobogo"
-	t.SearchURL = common.TorrentURL[t.Name] + "/search?skeyword=" + keyword
+	t.SearchURL = common.TorrentURL[t.Name] + "/search?skeyword=" + url.QueryEscape(t.Keyword)
 }
 
 // Crawl torrent data from web site

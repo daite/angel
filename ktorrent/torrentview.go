@@ -3,6 +3,7 @@ package ktorrent
 import (
 	"fmt"
 	"log"
+	"net/url"
 	"strings"
 	"sync"
 
@@ -23,7 +24,7 @@ type TorrentView struct {
 func (t *TorrentView) initialize(keyword string) {
 	t.Keyword = keyword
 	t.Name = "torrentview"
-	t.SearchURL = common.TorrentURL[t.Name] + "/bbs/search.php?&stx=" + keyword
+	t.SearchURL = common.TorrentURL[t.Name] + "/bbs/search.php?&stx=" + url.QueryEscape(t.Keyword)
 }
 
 // Crawl torrent data from web site

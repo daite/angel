@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"net/url"
 	"regexp"
 	"strings"
 
@@ -23,7 +24,7 @@ type TorrentTube struct {
 func (t *TorrentTube) initialize(keyword string) {
 	t.Keyword = keyword
 	t.Name = "torrenttube"
-	t.SearchURL = common.TorrentURL[t.Name] + "/kt/search?p&q=" + keyword
+	t.SearchURL = common.TorrentURL[t.Name] + "/kt/search?p&q=" + url.QueryEscape(t.Keyword)
 }
 
 // Crawl torrent data from web site

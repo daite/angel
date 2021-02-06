@@ -3,6 +3,7 @@ package ktorrent
 import (
 	"fmt"
 	"log"
+	"net/url"
 	"strings"
 	"sync"
 
@@ -23,7 +24,7 @@ type TorrentSee struct {
 func (t *TorrentSee) initialize(keyword string) {
 	t.Keyword = keyword
 	t.Name = "torrentsee"
-	t.SearchURL = common.TorrentURL[t.Name] + "/search/index?keywords=" + keyword
+	t.SearchURL = common.TorrentURL[t.Name] + "/search/index?keywords=" + url.QueryEscape(t.Keyword)
 }
 
 // Crawl torrent data from web site

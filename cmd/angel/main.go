@@ -37,8 +37,8 @@ func main() {
 			if c.String("lang") == "kr" {
 				s := []common.Scraping{
 					&ktorrent.TToBoGo{},
-					&ktorrent.TorrentView{},
 					&ktorrent.TorrentMobile{},
+					&ktorrent.TorrentView{},
 					&ktorrent.TorrentTube{},
 					&ktorrent.TShare{},
 					&ktorrent.TorrentSir{},

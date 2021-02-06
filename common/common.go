@@ -132,7 +132,7 @@ func GetAvailableSites(oldItems []Scraping, country string) []Scraping {
 	newItems := make([]Scraping, 0)
 	items := []string{}
 	if country == "kr" {
-		items = []string{"ttobogo", "torrentview", "torrentmobile", "torrenttube", "tshare", "torrentsir", "torrentj"}
+		items = []string{"ttobogo", "torrentmobile", "torrentview", "torrenttube", "tshare", "torrentsir", "torrentj", "torrentsee"}
 	} else {
 		items = []string{"nyaa", "sukebe"}
 	}
