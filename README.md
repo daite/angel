@@ -11,8 +11,15 @@
 |  6 | torrentsir    | https://torrentsir31.com    |    O   |
 |  7 |   torrentj    | https://torrentj32.com      |    O   |
 |  8 |   torrentsee  | https://torrentsee47.com    |    O   |
-|  9 | nyaa          | https://nyaa.si             |    O   |
-| 10 | sukebei       | https://sukebei.nyaa.si     |    O   |
+|  9 |  torrentqq    | https://torrentqq73.com     |        |
+| 10 | torrenttip    | https://torrenttip19.com    |        |
+| 11 | torrentstory  | https://torrentstory13.com  |        |
+| 12 | torrentmax    | https://torrentmax15.com    |        |
+| 13 | torrentplay   | https://torrentplay10.com   |        |
+| 14 | torrentsome   | https://torrentsome1.com    |        |
+| 15 | jujutorrent   | https://jujutorrent28.com   |        |
+| 16 | nyaa          | https://nyaa.si             |    O   |
+| 17 | sukebei       | https://sukebei.nyaa.si     |    O   |
 # 2. Reference
 * [cli](https://github.com/urfave/cli/blob/master/docs/v2/manual.md)
 * [css selector](https://www.w3schools.com/cssref/css_selectors.asp)
@@ -25,7 +32,6 @@
 * [go binary size reduce](https://stackoverflow.com/questions/3861634/how-to-reduce-compiled-file-size)
 * [go sync map to map](https://stackoverflow.com/questions/58995416/how-to-pretty-print-the-contents-of-a-sync-map)
 * [go race detector](https://golang.org/doc/articles/race_detector.html)
-* [go 언어 실전 테크닉](http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9791161750262&orderClick=LAG&Kc=)
 * [json validator](https://jsonformatter.curiousconcept.com/)
 * [json to map](https://gist.github.com/cuixin/f10cea0f8639454acdfbc0c9cdced764)
 * [regex square blanket](https://stackoverflow.com/questions/928072/whats-the-regular-expression-that-matches-a-square-bracket)
