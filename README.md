@@ -1,17 +1,18 @@
 [![Build Status](https://travis-ci.com/daite/angel.svg?branch=main)](https://travis-ci.com/daite/angel)
 ![example workflow name](https://github.com/daite/angel/workflows/Go/badge.svg)
-[![codecov](https://codecov.io/gh/daite/angel/branch/main/graph/badge.svg?token=BLF2OUSOBO)](https://codecov.io/gh/daite/angel)
 # 1. Torrent sites
 | No |      site     |             url             | status |
 |:--:|:-------------:|:---------------------------:|:------:|
 |  1 |    ttobogo    | https://ttobogo.net         |    O   |
-|  2 |   torrentube  | https://torrentube.to       |     O  |
-|  3 |     tshare    | https://tshare.org          |     O  |
+|  2 |   torrentube  | https://torrentube.to       |    O   |
+|  3 |     tshare    | https://tshare.org          |    O   |
 |  4 | torrentmobile | https://torrentmobile15.com |    O   |
-|  5 | torrentview   | https://torrentview28.com  |    O   |
-|  6 | torrentsir   | https://torrentsir31.com |    O   |
-|  7 | nyaa          | https://nyaa.si            |    O   |
-|  8 | sukebei       | https://sukebei.nyaa.si    |    O   |
+|  5 | torrentview   | https://torrentview28.com   |    O   |
+|  6 | torrentsir    | https://torrentsir31.com    |    O   |
+|  7 |   torrentj    | https://torrentj32.com      |    O   |
+|  8 |   torrentsee  | https://torrentsee47.com    |    O   |
+|  9 | nyaa          | https://nyaa.si             |    O   |
+| 10 | sukebei       | https://sukebei.nyaa.si     |    O   |
 # 2. Reference
 * [cli](https://github.com/urfave/cli/blob/master/docs/v2/manual.md)
 * [css selector](https://www.w3schools.com/cssref/css_selectors.asp)
