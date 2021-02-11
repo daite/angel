@@ -45,17 +45,17 @@ func main() {
 					&ktorrent.TorrentJ{},
 					&ktorrent.TorrentSee{},
 				}
-				s = common.GetAvailableSites(s, "kr")
+				s = common.GetAvailableSites(s)
 				data := common.CollectData(s, keyword)
 				common.PrintData(data)
 			} else {
-				s := []common.Scraping{
+				s := []common.ScrapingEx{
 					&jtorrent.Nyaa{},
 					&jtorrent.SuKeBe{},
 				}
-				s = common.GetAvailableSites(s, "jp")
-				data := common.CollectData(s, keyword)
-				common.PrintData(data)
+				s = common.GetAvailableSitesEx(s)
+				data := common.CollectDataEx(s, keyword)
+				common.PrintDataEx(data)
 			}
 			return nil
 		},

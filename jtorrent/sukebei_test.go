@@ -43,10 +43,11 @@ func TestGetMagnetFuncForSukeBei(t *testing.T) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	magnet, _ := doc.Find("a.card-footer-item").Attr("href")
-	got := strings.Split(magnet, "&")[0]
-	want := "magnet:?xt=urn:btih:92596bbdc0176f523508afbf99550247dba8b35f"
-	if got != want {
+	got := doc.Find("div.col-md-5").Map(func(i int, s *goquery.Selection) string {
+		return strings.TrimSpace(s.Text())
+	})
+	want := "92596bbdc0176f523508afbf99550247dba8b35f"
+	if got[8] != want {
 		t.Errorf("GetMagnet() for Sukebei = %q, want %q", got, want)
 	}
 }

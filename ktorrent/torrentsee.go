@@ -2,7 +2,6 @@ package ktorrent
 
 import (
 	"fmt"
-	"log"
 	"net/url"
 	"strings"
 	"sync"
@@ -32,6 +31,9 @@ func (t *TorrentSee) Crawl(keyword string) map[string]string {
 	t.initialize(keyword)
 	fmt.Printf("[*] %s starts Crawl!!\n", t.Name)
 	data := t.getData(t.SearchURL)
+	if data == nil {
+		return nil
+	}
 	m := map[string]string{}
 	data.Range(
 		func(key, value interface{}) bool {
@@ -45,11 +47,14 @@ func (t *TorrentSee) Crawl(keyword string) map[string]string {
 func (t *TorrentSee) getData(url string) *sync.Map {
 	var wg sync.WaitGroup
 	m := &sync.Map{}
-	resp := common.GetResponseFromURL(url)
+	resp, ok := common.GetResponseFromURL(url)
+	if !ok {
+		return nil
+	}
 	defer resp.Body.Close()
 	doc, err := goquery.NewDocumentFromResponse(resp)
 	if err != nil {
-		log.Fatalln(err)
+		return nil
 	}
 	doc.Find("li.tit > a").Each(func(i int, s *goquery.Selection) {
 		wg.Add(1)
@@ -58,7 +63,8 @@ func (t *TorrentSee) getData(url string) *sync.Map {
 			title := strings.TrimSpace(s.Text())
 			link, _ := s.Attr("href")
 			link = strings.TrimSpace(common.URLJoin(common.TorrentURL[t.Name], link))
-			m.Store(title, t.GetMagnet(link))
+			magnet := t.GetMagnet(link)
+			m.Store(title, magnet)
 		}()
 	})
 	wg.Wait()
@@ -68,15 +74,18 @@ func (t *TorrentSee) getData(url string) *sync.Map {
 
 // GetMagnet method returns torrent magnet
 func (t *TorrentSee) GetMagnet(url string) string {
-	resp := common.GetResponseFromURL(url)
+	resp, ok := common.GetResponseFromURL(url)
+	if !ok {
+		return "failed to fetch magnet"
+	}
 	defer resp.Body.Close()
 	doc, err := goquery.NewDocumentFromResponse(resp)
 	if err != nil {
-		log.Fatalln(err)
+		return err.Error()
 	}
 	magnet := strings.TrimSpace(doc.Find("tr > td > a[target]").Text())
 	if magnet == "" {
-		return "NO MAGNET"
+		return "no magnet"
 	}
-	return magnet
+	return magnet[:60]
 }

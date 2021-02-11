@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"net/url"
 	"regexp"
 	"strings"
@@ -32,11 +31,14 @@ func (t *TorrentTube) Crawl(keyword string) map[string]string {
 	t.initialize(keyword)
 	fmt.Printf("[*] %s starts Crawl!!\n", t.Name)
 	m := map[string]string{}
-	resp := common.GetResponseFromURL(t.SearchURL)
+	resp, ok := common.GetResponseFromURL(t.SearchURL)
+	if !ok {
+		return nil
+	}
 	defer resp.Body.Close()
 	b, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		log.Fatalln(err)
+		return nil
 	}
 	doc := string(b)
 	re := regexp.MustCompile(`\[[^\]]*\]`)
@@ -45,7 +47,7 @@ func (t *TorrentTube) Crawl(keyword string) map[string]string {
 	jsonMapArr := []map[string]interface{}{}
 	err = json.Unmarshal([]byte(jsonStr), &jsonMapArr)
 	if err != nil {
-		log.Fatalln(err)
+		return nil
 	}
 	for _, d := range jsonMapArr {
 		title := d["fn"].(string)

@@ -2,7 +2,6 @@ package jtorrent
 
 import (
 	"fmt"
-	"log"
 	"net/url"
 	"strings"
 	"sync"
@@ -19,8 +18,8 @@ type Client struct {
 
 // Data struct is for receiving final data
 type Data struct {
-	title  string
-	magnet string
+	title string
+	info  []string
 }
 
 var (
@@ -44,7 +43,7 @@ type Nyaa struct {
 	Name        string
 	Keyword     string
 	SearchURL   string
-	ScrapedData map[string]string
+	ScrapedData map[string][]string
 }
 
 // initialize method set keyword and URL based on default url
@@ -57,53 +56,77 @@ func (n *Nyaa) initialize(keyword string) {
 // Crawl torrent data from web site
 // NOTE: status code error: 429 429 Too Many Requests for goroutines
 // Max concurrent request: 5
-func (n *Nyaa) Crawl(keyword string) map[string]string {
+func (n *Nyaa) Crawl(keyword string) map[string][]string {
 	n.initialize(keyword)
 	fmt.Printf("[*] %s starts Crawl!!\n", n.Name)
 	data := n.getData(n.SearchURL)
+	if data == nil {
+		return nil
+	}
 	return data
 }
 
 // GetData method returns map(title, bbs url)
-func (n *Nyaa) getData(url string) map[string]string {
-	resp := common.GetResponseFromURL(url)
+func (n *Nyaa) getData(url string) map[string][]string {
+	resp, ok := common.GetResponseFromURL(url)
+	if !ok {
+		return nil
+	}
 	defer resp.Body.Close()
 	doc, err := goquery.NewDocumentFromResponse(resp)
 	if err != nil {
-		log.Fatalln(err)
+		return nil
 	}
 	go create(doc, common.TorrentURL[n.Name])
 	n.makeWP(5)
-	m := make(map[string]string, 0)
+	m := make(map[string][]string, 0)
 	for d := range data {
-		m[d.title] = d.magnet
+		title := d.title
+		// Category 0
+		// Time     1
+		// Uploader 2
+		// Seeder   3
+		// Info     4
+		// Leecher  5
+		// FileSize 6
+		// Snatch   7
+		// Magnet   8
+		uploader := d.info[2]
+		seeder := d.info[3]
+		leecher := d.info[5]
+		snatch := d.info[7]
+		fileSize := d.info[6]
+		hash := d.info[8]
+		magnet := "magnet:?xt=urn:btih:" + hash
+		info := []string{uploader, seeder, leecher, snatch, fileSize, magnet}
+		m[title] = info
 	}
 	n.ScrapedData = m
 	return m
 }
 
-// GetMagnet method returns torrent magnet
-func (n *Nyaa) GetMagnet(url string) string {
-	resp := common.GetResponseFromURL(url)
+// GetInfo method returns torrent info
+func (n *Nyaa) GetInfo(url string) []string {
+	resp, ok := common.GetResponseFromURL(url)
+	if !ok {
+		return []string{"0", "0", "0", "failed to fetch magnet"}
+	}
 	defer resp.Body.Close()
 	doc, err := goquery.NewDocumentFromResponse(resp)
 	if err != nil {
-		log.Fatalln(err)
+		return []string{"0", "0", "0", err.Error()}
 	}
-	magnet, ok := doc.Find("a.card-footer-item").Attr("href")
-	if !ok {
-		// maybe subtitles for movies
-		return "NO MAGNET"
-	}
-	magnet = strings.Split(magnet, "&")[0]
-	return magnet
+	info := doc.Find("div.col-md-5").Map(func(i int, s *goquery.Selection) string {
+		return strings.TrimSpace(s.Text())
+	})
+	return info
 }
 
 func (n *Nyaa) worker(wg *sync.WaitGroup) {
 	for c := range clients {
 		title := c.title
-		magnet := n.GetMagnet(c.link)
-		data <- Data{title, magnet}
+		info := n.GetInfo(c.link)
+		data <- Data{title, info}
 	}
 	wg.Done()
 }

@@ -2,7 +2,6 @@ package ktorrent
 
 import (
 	"fmt"
-	"log"
 	"net/url"
 	"strings"
 	"sync"
@@ -44,11 +43,14 @@ func (t *TToBoGo) Crawl(keyword string) map[string]string {
 func (t *TToBoGo) getData(url string) *sync.Map {
 	var wg sync.WaitGroup
 	m := &sync.Map{}
-	resp := common.GetResponseFromURL(url)
+	resp, ok := common.GetResponseFromURL(url)
+	if !ok {
+		return nil
+	}
 	defer resp.Body.Close()
 	doc, err := goquery.NewDocumentFromResponse(resp)
 	if err != nil {
-		log.Fatalln(err)
+		return nil
 	}
 	doc.Find("a.subject").Each(func(i int, s *goquery.Selection) {
 		wg.Add(1)
@@ -56,7 +58,8 @@ func (t *TToBoGo) getData(url string) *sync.Map {
 			defer wg.Done()
 			title := s.Text()
 			link, _ := s.Attr("href")
-			m.Store(title, t.GetMagnet(link))
+			magnet := t.GetMagnet(link)
+			m.Store(title, magnet)
 		}()
 	})
 	wg.Wait()
@@ -66,16 +69,19 @@ func (t *TToBoGo) getData(url string) *sync.Map {
 
 // GetMagnet method returns torrent magnet
 func (t *TToBoGo) GetMagnet(url string) string {
-	resp := common.GetResponseFromURL(url)
+	resp, ok := common.GetResponseFromURL(url)
+	if !ok {
+		return "failed to fetch magnet"
+	}
 	defer resp.Body.Close()
 	doc, err := goquery.NewDocumentFromResponse(resp)
 	if err != nil {
-		log.Fatalln(err)
+		return err.Error()
 	}
 	magnet, ok := doc.Find(".btn.btn-blue").Attr("onclick")
 	if !ok {
 		// maybe subtitles for movies
-		return "NO MAGNET"
+		return "no magnet"
 	}
 	return strings.Split(magnet, "'")[1]
 }

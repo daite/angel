@@ -2,7 +2,6 @@ package ktorrent
 
 import (
 	"fmt"
-	"log"
 	"net/url"
 	"strings"
 	"sync"
@@ -45,11 +44,14 @@ func (t *TorrentSir) Crawl(keyword string) map[string]string {
 func (t *TorrentSir) getData(url string) *sync.Map {
 	var wg sync.WaitGroup
 	m := &sync.Map{}
-	resp := common.GetResponseFromURL(url)
+	resp, ok := common.GetResponseFromURL(url)
+	if !ok {
+		return nil
+	}
 	defer resp.Body.Close()
 	doc, err := goquery.NewDocumentFromResponse(resp)
 	if err != nil {
-		log.Fatalln(err)
+		return nil
 	}
 	doc.Find("div.media-heading a").Each(func(i int, s *goquery.Selection) {
 		wg.Add(1)
@@ -58,7 +60,8 @@ func (t *TorrentSir) getData(url string) *sync.Map {
 			title := strings.TrimSpace(s.Text())
 			link, _ := s.Attr("href")
 			link = strings.TrimSpace(common.URLJoin(common.TorrentURL[t.Name], link))
-			m.Store(title, t.GetMagnet(link))
+			magnet := t.GetMagnet(link)
+			m.Store(title, magnet)
 		}()
 	})
 	wg.Wait()
@@ -68,11 +71,14 @@ func (t *TorrentSir) getData(url string) *sync.Map {
 
 // GetMagnet method returns torrent magnet
 func (t *TorrentSir) GetMagnet(url string) string {
-	resp := common.GetResponseFromURL(url)
+	resp, ok := common.GetResponseFromURL(url)
+	if !ok {
+		return "failed to fetch magnet"
+	}
 	defer resp.Body.Close()
 	doc, err := goquery.NewDocumentFromResponse(resp)
 	if err != nil {
-		log.Fatalln(err)
+		return err.Error()
 	}
 	magnet := strings.TrimSpace(doc.Find("ul.list-group").Text())
 	if magnet == "" {
