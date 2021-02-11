@@ -96,8 +96,12 @@ func (s *SuKeBe) getData(url string) map[string][]string {
 		snatch := d.info[7]
 		fileSize := d.info[6]
 		hash := d.info[8]
+		folder := d.info[9]
 		magnet := "magnet:?xt=urn:btih:" + hash
-		info := []string{uploader, seeder, leecher, snatch, fileSize, magnet}
+		info := []string{
+			uploader, seeder, leecher,
+			snatch, fileSize, magnet, folder,
+		}
 		title := common.RemoveNonAscII(d.title) + " _ " + hash[:5]
 		m[title] = info
 	}
@@ -107,18 +111,24 @@ func (s *SuKeBe) getData(url string) map[string][]string {
 
 // GetInfo method returns torrent info
 func (s *SuKeBe) GetInfo(url string) []string {
+	info := make([]string, 10)
 	resp, ok := common.GetResponseFromURL(url)
 	if !ok {
-		return []string{"None", "0", "0", "0", "failed to fetch magnet"}
+		return info
 	}
 	defer resp.Body.Close()
 	doc, err := goquery.NewDocumentFromResponse(resp)
 	if err != nil {
-		return []string{"None", "0", "0", "0", err.Error()}
+		return info
 	}
-	info := doc.Find("div.col-md-5").Map(func(i int, s *goquery.Selection) string {
+	info = doc.Find("div.col-md-5").Map(func(i int, s *goquery.Selection) string {
 		return strings.TrimSpace(s.Text())
 	})
+	folder := "No"
+	if _, ok := doc.Find("a.folder").Attr("class"); ok {
+		folder = "Yes"
+	}
+	info = append(info, folder)
 	return info
 }
 

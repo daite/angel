@@ -91,14 +91,19 @@ func (n *Nyaa) getData(url string) map[string][]string {
 		// FileSize 6
 		// Snatch   7
 		// Magnet   8
+		// Folder   9
 		uploader := d.info[2]
 		seeder := d.info[3]
 		leecher := d.info[5]
 		snatch := d.info[7]
 		fileSize := d.info[6]
 		hash := d.info[8]
+		folder := d.info[9]
 		magnet := "magnet:?xt=urn:btih:" + hash
-		info := []string{uploader, seeder, leecher, snatch, fileSize, magnet}
+		info := []string{
+			uploader, seeder, leecher, snatch,
+			fileSize, magnet, folder,
+		}
 		m[title] = info
 	}
 	n.ScrapedData = m
@@ -107,18 +112,24 @@ func (n *Nyaa) getData(url string) map[string][]string {
 
 // GetInfo method returns torrent info
 func (n *Nyaa) GetInfo(url string) []string {
+	info := make([]string, 10)
 	resp, ok := common.GetResponseFromURL(url)
 	if !ok {
-		return []string{"0", "0", "0", "failed to fetch magnet"}
+		return info
 	}
 	defer resp.Body.Close()
 	doc, err := goquery.NewDocumentFromResponse(resp)
 	if err != nil {
-		return []string{"0", "0", "0", err.Error()}
+		return info
 	}
-	info := doc.Find("div.col-md-5").Map(func(i int, s *goquery.Selection) string {
+	info = doc.Find("div.col-md-5").Map(func(i int, s *goquery.Selection) string {
 		return strings.TrimSpace(s.Text())
 	})
+	folder := "No"
+	if _, ok := doc.Find("a.folder").Attr("class"); ok {
+		folder = "Yes"
+	}
+	info = append(info, folder)
 	return info
 }
 

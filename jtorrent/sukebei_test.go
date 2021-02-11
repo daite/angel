@@ -33,7 +33,7 @@ func TestGetDataFuncForSukeBei(t *testing.T) {
 		t.Errorf("GetData() for Sukebei = %q, want %q", got, want)
 	}
 }
-func TestGetMagnetFuncForSukeBei(t *testing.T) {
+func TestGetInfoFuncForSukeBei(t *testing.T) {
 	f, err := os.Open("../resources/sukebei_bbs.html")
 	if err != nil {
 		log.Fatal(err)
@@ -46,8 +46,12 @@ func TestGetMagnetFuncForSukeBei(t *testing.T) {
 	got := doc.Find("div.col-md-5").Map(func(i int, s *goquery.Selection) string {
 		return strings.TrimSpace(s.Text())
 	})
-	want := "92596bbdc0176f523508afbf99550247dba8b35f"
+	want := "9801ef1cf9ad6a3dd788d13df45471dbf2a29271"
 	if got[8] != want {
-		t.Errorf("GetMagnet() for Sukebei = %q, want %q", got, want)
+		t.Errorf("GetInfo() for Sukebei = %q, want %q", got, want)
+	}
+	_, ok := doc.Find("a.folder").Attr("class")
+	if !ok {
+		t.Errorf("GetInfo() for Sukebei = %q, want %q", got, want)
 	}
 }

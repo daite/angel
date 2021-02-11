@@ -133,8 +133,8 @@ func PrintData(data map[string]string) {
 func PrintDataEx(data map[string][]string) {
 	table := tablewriter.NewWriter(os.Stdout)
 	table.SetHeader([]string{
-		"Title", "Uploader", "Seeder",
-		"Leecher", "Snatch", "FileSize", "Magnet",
+		"Title", "Uploader", "Seeder", "Leecher",
+		"Snatch", "FileSize", "Magnet", "Folder",
 	})
 	for k, v := range data {
 		m := make([]string, 0)
