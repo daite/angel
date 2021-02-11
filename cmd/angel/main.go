@@ -10,7 +10,7 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
-var version = "0.2.0"
+var version = "0.3.0"
 
 func main() {
 	cli.VersionFlag = &cli.BoolFlag{
