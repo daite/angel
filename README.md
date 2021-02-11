@@ -18,7 +18,7 @@
 | 12 | torrentmax    | https://torrentmax15.com    |    O   |
 | 13 | torrentplay   | https://torrentplay10.com   |    X   |
 | 14 | torrentsome   | https://torrentsome1.com    |    X   |
-| 15 | jujutorrent   | https://jujutorrent28.com   |        |
+| 15 | jujutorrent   | https://jujutorrent28.com   |    O   |
 | 16 | nyaa          | https://nyaa.si             |    O   |
 | 17 | sukebei       | https://sukebei.nyaa.si     |    O   |
 # 2. Reference
