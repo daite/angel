@@ -4,8 +4,4 @@ go:
  - master
 
 script:
-  - go test -race -coverprofile=coverage.txt -covermode=atomic ./...
   - go test ./...
-
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
