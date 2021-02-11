@@ -29,7 +29,6 @@ func (t *TorrentSee) initialize(keyword string) {
 // Crawl torrent data from web site
 func (t *TorrentSee) Crawl(keyword string) map[string]string {
 	t.initialize(keyword)
-	fmt.Printf("[*] %s starts Crawl!!\n", t.Name)
 	data := t.getData(t.SearchURL)
 	if data == nil {
 		return nil

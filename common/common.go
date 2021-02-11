@@ -37,6 +37,8 @@ var (
 		"torrentsir":    "https://torrentsir31.com",
 		"torrentj":      "https://torrentj32.com",
 		"torrentsee":    "https://torrentsee47.com",
+		"torrentmax":    "https://torrentmax15.com",
+		"jujutorrent":   "https://jujutorrent28.com",
 	}
 	UserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_1_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36"
 )
@@ -61,6 +63,7 @@ func GetResponseFromURL(url string) (resp *http.Response, ok bool) {
 
 // CollectData function executes web scraping based on each scrapper
 func CollectData(s []Scraping, keyword string) map[string]string {
+	fmt.Println("[*] Angel is collecting data ...")
 	var wg sync.WaitGroup
 	ch := make(chan map[string]string, len(TorrentURL))
 	for _, i := range s {
@@ -88,6 +91,7 @@ func CollectData(s []Scraping, keyword string) map[string]string {
 
 // CollectDataEx function executes web scraping based on each scrapper
 func CollectDataEx(s []ScrapingEx, keyword string) map[string][]string {
+	fmt.Println("[*] Angel is collecting data ...")
 	var wg sync.WaitGroup
 	ch := make(chan map[string][]string, len(TorrentURL))
 	for _, i := range s {
@@ -182,12 +186,13 @@ func CheckNetWorkFromURL(url string) bool {
 
 // GetAvailableSites function gets available torrent sites
 func GetAvailableSites(oldItems []Scraping) []Scraping {
-	fmt.Println("[*] Getting available torrent sites")
+	fmt.Println("[*] Angel is checking available torrent sites ...")
 	newItems := make([]Scraping, 0)
 	items := []string{
 		"ttobogo", "torrentmobile", "torrentview",
 		"torrenttube", "tshare", "torrentsir",
-		"torrentj", "torrentsee",
+		"torrentj", "torrentsee", "torrentmax",
+		"jujutorrent",
 	}
 	ch := make(chan int, len(items))
 	var wg sync.WaitGroup
@@ -211,7 +216,7 @@ func GetAvailableSites(oldItems []Scraping) []Scraping {
 
 // GetAvailableSitesEx function gets available torrent sites
 func GetAvailableSitesEx(oldItems []ScrapingEx) []ScrapingEx {
-	fmt.Println("[*] Getting available torrent sites")
+	fmt.Println("[*] Angel is checking available torrent sites ...")
 	newItems := make([]ScrapingEx, 0)
 	items := []string{"nyaa", "sukebe"}
 	ch := make(chan int, len(items))

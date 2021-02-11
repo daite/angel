@@ -29,7 +29,6 @@ func (t *TorrentSir) initialize(keyword string) {
 // Crawl torrent data from web site
 func (t *TorrentSir) Crawl(keyword string) map[string]string {
 	t.initialize(keyword)
-	fmt.Printf("[*] %s starts Crawl!!\n", t.Name)
 	data := t.getData(t.SearchURL)
 	m := map[string]string{}
 	data.Range(
@@ -82,7 +81,7 @@ func (t *TorrentSir) GetMagnet(url string) string {
 	}
 	magnet := strings.TrimSpace(doc.Find("ul.list-group").Text())
 	if magnet == "" {
-		return "NO MAGNET"
+		return "no magnet"
 	}
 	return magnet
 }

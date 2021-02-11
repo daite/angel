@@ -1,7 +1,6 @@
 package jtorrent
 
 import (
-	"fmt"
 	"net/url"
 	"strings"
 	"sync"
@@ -58,7 +57,6 @@ func (s *SuKeBe) initialize(keyword string) {
 // Max concurrent request: 5
 func (s *SuKeBe) Crawl(keyword string) map[string][]string {
 	s.initialize(keyword)
-	fmt.Printf("[*] %s starts Crawl!!\n", s.Name)
 	data := s.getData(s.SearchURL)
 	if data == nil {
 		return nil

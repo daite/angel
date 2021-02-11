@@ -28,7 +28,6 @@ func (t *TShare) initialize(keyword string) {
 // Crawl torrent data from web site
 func (t *TShare) Crawl(keyword string) map[string]string {
 	t.initialize(keyword)
-	fmt.Printf("[*] %s starts Crawl!!\n", t.Name)
 	data := t.getData(t.SearchURL)
 	m := map[string]string{}
 	data.Range(

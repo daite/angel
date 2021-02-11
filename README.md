@@ -12,12 +12,12 @@
 |  6 | torrentsir    | https://torrentsir31.com    |    O   |
 |  7 |   torrentj    | https://torrentj32.com      |    O   |
 |  8 |   torrentsee  | https://torrentsee47.com    |    O   |
-|  9 |  torrentqq    | https://torrentqq73.com     |        |
-| 10 | torrenttip    | https://torrenttip19.com    |        |
-| 11 | torrentstory  | https://torrentstory13.com  |        |
-| 12 | torrentmax    | https://torrentmax15.com    |        |
-| 13 | torrentplay   | https://torrentplay10.com   |        |
-| 14 | torrentsome   | https://torrentsome1.com    |        |
+|  9 |  torrentqq    | https://torrentqq73.com     |    X   |
+| 10 | torrenttip    | https://torrenttip19.com    |    X   |
+| 11 | torrentstory  | https://torrentstory13.com  |    X   |
+| 12 | torrentmax    | https://torrentmax15.com    |    O   |
+| 13 | torrentplay   | https://torrentplay10.com   |    X   |
+| 14 | torrentsome   | https://torrentsome1.com    |    X   |
 | 15 | jujutorrent   | https://jujutorrent28.com   |        |
 | 16 | nyaa          | https://nyaa.si             |    O   |
 | 17 | sukebei       | https://sukebei.nyaa.si     |    O   |

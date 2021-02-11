@@ -1,7 +1,6 @@
 package jtorrent
 
 import (
-	"fmt"
 	"net/url"
 	"strings"
 	"sync"
@@ -58,7 +57,6 @@ func (n *Nyaa) initialize(keyword string) {
 // Max concurrent request: 5
 func (n *Nyaa) Crawl(keyword string) map[string][]string {
 	n.initialize(keyword)
-	fmt.Printf("[*] %s starts Crawl!!\n", n.Name)
 	data := n.getData(n.SearchURL)
 	if data == nil {
 		return nil

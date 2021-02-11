@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"os"
 
@@ -44,8 +45,11 @@ func main() {
 					&ktorrent.TorrentSir{},
 					&ktorrent.TorrentJ{},
 					&ktorrent.TorrentSee{},
+					&ktorrent.TorrentMax{},
+					&ktorrent.JuJuTorrent{},
 				}
 				s = common.GetAvailableSites(s)
+				fmt.Printf("[*] Angel found %d available site(s) ...\n", len(s))
 				data := common.CollectData(s, keyword)
 				common.PrintData(data)
 			} else {
@@ -54,6 +58,7 @@ func main() {
 					&jtorrent.SuKeBe{},
 				}
 				s = common.GetAvailableSitesEx(s)
+				fmt.Printf("[*] Angel found %d available site(s) ...\n", len(s))
 				data := common.CollectDataEx(s, keyword)
 				common.PrintDataEx(data)
 			}

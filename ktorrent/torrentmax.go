@@ -10,8 +10,9 @@ import (
 	"github.com/daite/angel/common"
 )
 
-// TorrentMobile struct is for TorrentMobile torrent web site
-type TorrentMobile struct {
+// TorrentMax struct is for TorrentSir torrent web site
+// It is exactly the same with torrentmobile
+type TorrentMax struct {
 	Name        string
 	Keyword     string
 	SearchURL   string
@@ -19,19 +20,16 @@ type TorrentMobile struct {
 }
 
 // initialize method set keyword and URL based on default url
-func (t *TorrentMobile) initialize(keyword string) {
+func (t *TorrentMax) initialize(keyword string) {
 	t.Keyword = keyword
-	t.Name = "torrentmobile"
+	t.Name = "torrentmax"
 	t.SearchURL = common.TorrentURL[t.Name] + "/bbs/search.php?&stx=" + url.QueryEscape(t.Keyword)
 }
 
 // Crawl torrent data from web site
-func (t *TorrentMobile) Crawl(keyword string) map[string]string {
+func (t *TorrentMax) Crawl(keyword string) map[string]string {
 	t.initialize(keyword)
 	data := t.getData(t.SearchURL)
-	if data == nil {
-		return nil
-	}
 	m := map[string]string{}
 	data.Range(
 		func(key, value interface{}) bool {
@@ -42,7 +40,7 @@ func (t *TorrentMobile) Crawl(keyword string) map[string]string {
 }
 
 // GetData method returns map(title, bbs url)
-func (t *TorrentMobile) getData(url string) *sync.Map {
+func (t *TorrentMax) getData(url string) *sync.Map {
 	var wg sync.WaitGroup
 	m := &sync.Map{}
 	resp, ok := common.GetResponseFromURL(url)
@@ -71,7 +69,7 @@ func (t *TorrentMobile) getData(url string) *sync.Map {
 }
 
 // GetMagnet method returns torrent magnet
-func (t *TorrentMobile) GetMagnet(url string) string {
+func (t *TorrentMax) GetMagnet(url string) string {
 	resp, ok := common.GetResponseFromURL(url)
 	if !ok {
 		return "failed to fetch magnet"

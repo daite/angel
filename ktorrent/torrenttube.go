@@ -2,7 +2,6 @@ package ktorrent
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"net/url"
 	"regexp"
@@ -29,7 +28,6 @@ func (t *TorrentTube) initialize(keyword string) {
 // Crawl torrent data from web site
 func (t *TorrentTube) Crawl(keyword string) map[string]string {
 	t.initialize(keyword)
-	fmt.Printf("[*] %s starts Crawl!!\n", t.Name)
 	m := map[string]string{}
 	resp, ok := common.GetResponseFromURL(t.SearchURL)
 	if !ok {
