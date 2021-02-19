@@ -39,6 +39,7 @@ var (
 		"torrentsee":    "https://torrentsee47.com",
 		"torrentmax":    "https://torrentmax15.com",
 		"jujutorrent":   "https://jujutorrent28.com",
+		"torrenttoast":  "https://tttt10.net",
 	}
 	UserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_1_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36"
 )
@@ -192,7 +193,7 @@ func GetAvailableSites(oldItems []Scraping) []Scraping {
 		"ttobogo", "torrentmobile", "torrentview",
 		"torrenttube", "tshare", "torrentsir",
 		"torrentj", "torrentsee", "torrentmax",
-		"jujutorrent",
+		"jujutorrent", "torrenttoast",
 	}
 	ch := make(chan int, len(items))
 	var wg sync.WaitGroup
