@@ -10,7 +10,7 @@ import (
 	"github.com/daite/angel/common"
 )
 
-// TorrentMax struct is for TorrentSir torrent web site
+// TorrentMax struct is for TorrentMax torrent web site
 // It is exactly the same with torrentmobile
 type TorrentMax struct {
 	Name        string
