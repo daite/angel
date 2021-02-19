@@ -19,8 +19,9 @@
 | 13 | torrentplay   | https://torrentplay10.com   |    X   |
 | 14 | torrentsome   | https://torrentsome1.com    |    X   |
 | 15 | jujutorrent   | https://jujutorrent28.com   |    O   |
-| 16 | nyaa          | https://nyaa.si             |    O   |
-| 17 | sukebei       | https://sukebei.nyaa.si     |    O   |
+| 16 | torrenttoast  | https://tttt10.net          |    O   |
+| 17 | nyaa          | https://nyaa.si             |    O   |
+| 18 | sukebei       | https://sukebei.nyaa.si     |    O   |
 # 2. Reference
 * [cli](https://github.com/urfave/cli/blob/master/docs/v2/manual.md)
 * [css selector](https://www.w3schools.com/cssref/css_selectors.asp)
