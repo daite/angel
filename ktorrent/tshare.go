@@ -10,7 +10,7 @@ import (
 	"github.com/daite/angel/common"
 )
 
-// TShare struct is for ttobogo torrent web site
+// TShare struct is for TShare torrent web site
 type TShare struct {
 	Name        string
 	Keyword     string

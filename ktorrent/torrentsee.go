@@ -11,7 +11,6 @@ import (
 )
 
 // TorrentSee struct is for TorrentSee torrent web site
-// It is exactly the same with torrentmobile
 type TorrentSee struct {
 	Name        string
 	Keyword     string

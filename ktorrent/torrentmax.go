@@ -11,7 +11,6 @@ import (
 )
 
 // TorrentMax struct is for TorrentMax torrent web site
-// It is exactly the same with torrentmobile
 type TorrentMax struct {
 	Name        string
 	Keyword     string

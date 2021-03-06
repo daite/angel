@@ -10,8 +10,7 @@ import (
 	"github.com/daite/angel/common"
 )
 
-// JuJuTorrent struct is for TorrentSir torrent web site
-// It is exactly the same with torrentmobile
+// JuJuTorrent struct is for JuJuTorrent web site
 type JuJuTorrent struct {
 	Name        string
 	Keyword     string

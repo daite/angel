@@ -12,7 +12,6 @@ import (
 )
 
 // TorrentJ struct is for TorrentJ torrent web site
-// It is exactly the same with torrentmobile
 type TorrentJ struct {
 	Name        string
 	Keyword     string

@@ -11,7 +11,6 @@ import (
 )
 
 // TorrentSir struct is for TorrentSir torrent web site
-// It is exactly the same with torrentmobile
 type TorrentSir struct {
 	Name        string
 	Keyword     string

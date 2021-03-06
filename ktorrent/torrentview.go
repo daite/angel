@@ -11,7 +11,6 @@ import (
 )
 
 // TorrentView struct is for TorrentView torrent web site
-// It is exactly the same with torrentmobile
 type TorrentView struct {
 	Name        string
 	Keyword     string

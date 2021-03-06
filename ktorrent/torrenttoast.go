@@ -10,7 +10,7 @@ import (
 	"github.com/daite/angel/common"
 )
 
-// TorrentToast struct is for TorrentMobile torrent web site
+// TorrentToast struct is for TorrentToast torrent web site
 type TorrentToast struct {
 	Name        string
 	Keyword     string

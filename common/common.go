@@ -84,6 +84,9 @@ func CollectData(s []Scraping, keyword string) map[string]string {
 	for elem := range ch {
 		for k, v := range elem {
 			k = strings.Replace(k, " ", "_", -1)
+			if v == "no magnet" {
+				continue
+			}
 			m[k] = v
 		}
 	}
