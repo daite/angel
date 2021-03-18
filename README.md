@@ -12,7 +12,7 @@
 |  6 | torrentsir    | https://torrentsir31.com    |    O   |
 |  7 |   torrentj    | https://torrentj32.com      |    O   |
 |  8 |   torrentsee  | https://torrentsee47.com    |    O   |
-|  9 |  torrentqq    | https://torrentqq73.com     |    X   |
+|  9 |  torrentqq    | https://torrentqq73.com     |    O   |
 | 10 | torrenttip    | https://torrenttip19.com    |    X   |
 | 11 | torrentstory  | https://torrentstory13.com  |    X   |
 | 12 | torrentmax    | https://torrentmax15.com    |    O   |
