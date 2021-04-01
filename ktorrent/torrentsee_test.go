@@ -42,7 +42,7 @@ func TestGetMagnetFuncForTorrentSee(t *testing.T) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	got := strings.TrimSpace(doc.Find("tr > td > a[target]").Text())
+	got := strings.TrimSpace(doc.Find("a[target].bbs_btn2").Text())
 	want := "magnet:?xt=urn:btih:80788dd173e48e5eb139758c165a89c3c048d458"
 	if got != want {
 		t.Errorf("GetMagnet() for TorrentSee = %q, want %q", got, want)

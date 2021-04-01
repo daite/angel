@@ -81,7 +81,7 @@ func (t *TorrentSee) GetMagnet(url string) string {
 	if err != nil {
 		return err.Error()
 	}
-	magnet := strings.TrimSpace(doc.Find("tr > td > a[target]").Text())
+	magnet := strings.TrimSpace(doc.Find("a[target].bbs_btn2").Text())
 	if magnet == "" {
 		return "no magnet"
 	}
