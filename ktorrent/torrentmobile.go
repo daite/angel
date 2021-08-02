@@ -50,7 +50,7 @@ func (t *TorrentMobile) getData(url string) *sync.Map {
 		return nil
 	}
 	defer resp.Body.Close()
-	doc, err := goquery.NewDocumentFromResponse(resp)
+	doc, err := goquery.NewDocumentFromReader(resp.Body)
 	if err != nil {
 		return nil
 	}
@@ -77,7 +77,7 @@ func (t *TorrentMobile) GetMagnet(url string) string {
 		return "failed to fetch magnet"
 	}
 	defer resp.Body.Close()
-	doc, err := goquery.NewDocumentFromResponse(resp)
+	doc, err := goquery.NewDocumentFromReader(resp.Body)
 	if err != nil {
 		return err.Error()
 	}

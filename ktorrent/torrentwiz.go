@@ -10,8 +10,8 @@ import (
 	"github.com/daite/angel/common"
 )
 
-// TorrentSir struct is for TorrentSir torrent web site
-type TorrentSir struct {
+// TorrentWiz struct is for TorrentWiz web site
+type TorrentWiz struct {
 	Name        string
 	Keyword     string
 	SearchURL   string
@@ -19,14 +19,14 @@ type TorrentSir struct {
 }
 
 // initialize method set keyword and URL based on default url
-func (t *TorrentSir) initialize(keyword string) {
+func (t *TorrentWiz) initialize(keyword string) {
 	t.Keyword = keyword
-	t.Name = "torrentsir"
+	t.Name = "torrentwiz"
 	t.SearchURL = common.TorrentURL[t.Name] + "/bbs/search.php?&stx=" + url.QueryEscape(t.Keyword)
 }
 
 // Crawl torrent data from web site
-func (t *TorrentSir) Crawl(keyword string) map[string]string {
+func (t *TorrentWiz) Crawl(keyword string) map[string]string {
 	t.initialize(keyword)
 	data := t.getData(t.SearchURL)
 	m := map[string]string{}
@@ -39,7 +39,7 @@ func (t *TorrentSir) Crawl(keyword string) map[string]string {
 }
 
 // GetData method returns map(title, bbs url)
-func (t *TorrentSir) getData(url string) *sync.Map {
+func (t *TorrentWiz) getData(url string) *sync.Map {
 	var wg sync.WaitGroup
 	m := &sync.Map{}
 	resp, ok := common.GetResponseFromURL(url)
@@ -68,7 +68,7 @@ func (t *TorrentSir) getData(url string) *sync.Map {
 }
 
 // GetMagnet method returns torrent magnet
-func (t *TorrentSir) GetMagnet(url string) string {
+func (t *TorrentWiz) GetMagnet(url string) string {
 	resp, ok := common.GetResponseFromURL(url)
 	if !ok {
 		return "failed to fetch magnet"
