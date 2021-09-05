@@ -7,9 +7,9 @@
 |  1 |    ttobogo    | https://ttobogo.net         |    O   |
 |  2 |   torrentube  | https://torrentube.to       |    O   |
 |  3 |     tshare    | https://tshare.org          |    O   |
-|  4 | torrentmobile | https://torrentmobile15.com |    O   |
-|  5 | torrentview   | https://torrentview28.com   |    O   |
-|  6 | torrentsir    | https://torrentsir31.com    |    O   |
+|  4 | torrentmobile | https://torrentmobile19.com |    O   |
+|  5 | torrentview   | https://torrentview39.com   |    O   |
+|  6 | torrentsir    | https://torrentsir34.com    |    O   |
 |  7 |   torrentj    | https://torrentj32.com      |    O   |
 |  8 |   torrentsee  | https://torrentsee47.com    |    O   |
 |  9 |  torrentqq    | https://torrentqq73.com     |    O   |

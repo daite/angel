@@ -28,13 +28,13 @@ type ScrapingEx interface {
 var (
 	TorrentURL = map[string]string{
 		"ttobogo":       "https://ttobogo.net",
-		"torrentmobile": "https://torrentmobile16.com",
-		"torrentview":   "https://torrentview29.com",
+		"torrentmobile": "https://torrentmobile19.com",
+		"torrentview":   "https://torrentview39.com",
 		"torrenttube":   "https://torrentube.to",
 		"tshare":        "https://tshare.org",
 		"nyaa":          "https://nyaa.si",
 		"sukebe":        "https://sukebei.nyaa.si",
-		"torrentsir":    "https://torrentsir31.com",
+		"torrentsir":    "https://torrentsir34.com",
 		"torrentj":      "https://torrentj32.com",
 		"torrentsee":    "https://torrentsee47.com",
 		"torrentmax":    "https://torrentmax15.com",
