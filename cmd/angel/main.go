@@ -48,6 +48,7 @@ func main() {
 					&ktorrent.TorrentMax{},
 					&ktorrent.JuJuTorrent{},
 					&ktorrent.TorrentToast{},
+					&ktorrent.TorrentQQ{},
 				}
 				s = common.GetAvailableSites(s)
 				fmt.Printf("[*] Angel found %d available site(s) ...\n", len(s))
