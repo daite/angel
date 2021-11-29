@@ -30,7 +30,6 @@ var (
 		"ttobogo":       "https://ttobogo.net",
 		"torrentmobile": "https://torrentmobile19.com",
 		"torrentview":   "https://torrentview39.com",
-		"torrenttube":   "https://torrentube.to",
 		"tshare":        "https://tshare.org",
 		"nyaa":          "https://nyaa.si",
 		"sukebe":        "https://sukebei.nyaa.si",

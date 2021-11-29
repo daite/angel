@@ -40,7 +40,6 @@ func main() {
 					&ktorrent.TToBoGo{},
 					&ktorrent.TorrentMobile{},
 					&ktorrent.TorrentView{},
-					&ktorrent.TorrentTube{},
 					&ktorrent.TShare{},
 					&ktorrent.TorrentSir{},
 					&ktorrent.TorrentJ{},
