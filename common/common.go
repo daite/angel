@@ -36,7 +36,6 @@ var (
 		"torrentsir":    "https://torrentsir42.com",
 		"torrentj":      "https://torrentj43.com",
 		"torrentsee":    "https://torrentsee81.com",
-		"torrentmax":    "https://torrentmax15.com",
 		"jujutorrent":   "https://jujutorrent28.com",
 		"torrenttoast":  "https://tttt10.net",
 		"torrentqq":     "https://torrentqq117.com",

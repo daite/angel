@@ -44,7 +44,6 @@ func main() {
 					&ktorrent.TorrentSir{},
 					&ktorrent.TorrentJ{},
 					&ktorrent.TorrentSee{},
-					&ktorrent.TorrentMax{},
 					&ktorrent.JuJuTorrent{},
 					&ktorrent.TorrentToast{},
 					&ktorrent.TorrentQQ{},
