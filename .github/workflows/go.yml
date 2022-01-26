@@ -19,6 +19,12 @@ jobs:
       uses: actions/setup-go@v2
       with:
         go-version: 1.15
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        goos: ${{ matrix.goos }}
+        goarch: ${{ matrix.goarch }}
+        project_path: "./cmd/angel"
+        binary_name: "angel"
+        ldflags: "-s -w"
     - name: Build
       run: go build -v ./...
     - name: Test
