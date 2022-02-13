@@ -5,7 +5,7 @@ on:
     tags:
       - 'v*'
  release:
-    types: [published]
+    types: [created]
 jobs:
   releases-matrix:
     name: Release Go Binary
