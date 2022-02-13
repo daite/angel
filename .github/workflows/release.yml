@@ -1,11 +1,9 @@
 name: Release
 
 on:
- push:
-    tags:
-      - 'v*'
- release:
+  release:
     types: [created]
+
 jobs:
   releases-matrix:
     name: Release Go Binary
