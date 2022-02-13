@@ -17,14 +17,15 @@
 | 11 | torrentstory  | https://torrentstory13.com  |    X   |
 | 12 | torrentmax    | https://torrentmax15.com    |    O   |
 | 13 | torrentplay   | https://torrentplay10.com   |    X   |
-| 14 | torrentsome   | https://torrentsome1.com    |    X   |
+| 14 | torrentsome   | https://torrentsome24.com   |    O   |
 | 15 | torrentlee    | https://torrentlee14.me     |    X   |
 | 16 | torrentwiz    | https://torrentwiz27.me     |    O   |
 | 17 | torrentgram   | https://torrentgram23.com   |    O   |
 | 18 | jujutorrent   | https://jujutorrent28.com   |    O   |
 | 19 | torrenttoast  | https://tttt10.net          |    O   |
-| 20 | nyaa          | https://nyaa.si             |    O   |
-| 21 | sukebei       | https://sukebei.nyaa.si     |    O   |
+| 20 | ktxtorrent    | https://ktxtorrent36.com    |    O   |
+| 21 | nyaa          | https://nyaa.si             |    O   |
+| 22 | sukebei       | https://sukebei.nyaa.si     |    O   |
 # 2. Reference
 * [cli](https://github.com/urfave/cli/blob/master/docs/v2/manual.md)
 * [css selector](https://www.w3schools.com/cssref/css_selectors.asp)
