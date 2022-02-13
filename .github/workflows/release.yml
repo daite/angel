@@ -1,11 +1,8 @@
-name: Release
+name: go-build
 
 on:
-  push:
-    branches:
-      - main
-    tags:
-      - "**"
+  release:
+    types: [created]
 
 jobs:
   releases-matrix:
@@ -13,7 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        # build and publish in parallel: linux/amd64
         goos: [linux, windows, darwin]
         goarch: [amd64]
     steps:
