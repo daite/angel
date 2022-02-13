@@ -25,3 +25,4 @@ jobs:
           binary_name: "angel"
           ldflags: "-s -w"
           extra_files: LICENSE README.md
+          sha256sum: TRUE
