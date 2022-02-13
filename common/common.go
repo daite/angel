@@ -41,6 +41,8 @@ var (
 		"torrentqq":     "https://torrentqq117.com",
 		"torrentwiz":    "https://torrentwiz27.me",
 		"torrentgram":   "https://torrentgram29.com",
+		"torrentsome":   "https://torrentsome24.com",
+		"ktxtorrent":    "https://ktxtorrent36.com",
 	}
 	UserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_1_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36"
 )
@@ -183,10 +185,7 @@ func CheckNetWorkFromURL(url string) bool {
 		return false
 	}
 	defer resp.Body.Close()
-	if resp.StatusCode != 200 {
-		return false
-	}
-	return true
+	return resp.StatusCode == 200
 }
 
 // GetAvailableSites function gets available torrent sites
@@ -197,7 +196,7 @@ func GetAvailableSites(oldItems []Scraping) []Scraping {
 		"ttobogo", "torrentmobile", "torrentview",
 		"tshare", "torrentsir", "torrentj",
 		"torrentsee", "jujutorrent", "torrenttoast",
-		"torrentqq",
+		"torrentqq", "torrentsome", "ktxtorrent",
 	}
 	ch := make(chan int, len(items))
 	var wg sync.WaitGroup
