@@ -195,8 +195,8 @@ func GetAvailableSites(oldItems []Scraping) []Scraping {
 	items := []string{
 		"ttobogo", "torrentmobile", "torrentview",
 		"tshare", "torrentsir", "torrentj",
-		"torrentsee", "jujutorrent", "torrenttoast",
-		"torrentqq", "torrentsome", "ktxtorrent",
+		"torrentsee", "torrenttoast", "torrentqq",
+		"torrentsome", "ktxtorrent",
 	}
 	ch := make(chan int, len(items))
 	var wg sync.WaitGroup

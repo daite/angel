@@ -11,7 +11,7 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
-var version = "0.6.0"
+var version = "0.6.1"
 
 func main() {
 	cli.VersionFlag = &cli.BoolFlag{
@@ -44,7 +44,6 @@ func main() {
 					&ktorrent.TorrentSir{},
 					&ktorrent.TorrentJ{},
 					&ktorrent.TorrentSee{},
-					&ktorrent.JuJuTorrent{},
 					&ktorrent.TorrentToast{},
 					&ktorrent.TorrentQQ{},
 					&ktorrent.TorrentSome{},
