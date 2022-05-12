@@ -11,7 +11,7 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
-var version = "0.6.1"
+var version = "0.7.0"
 
 func main() {
 	cli.VersionFlag = &cli.BoolFlag{
@@ -49,6 +49,7 @@ func main() {
 					&ktorrent.TorrentSome{},
 					&ktorrent.KTXTorrent{},
 					&ktorrent.JuJuTorrent{},
+					&ktorrent.TorrentRJ{},
 				}
 				s = common.GetAvailableSites(s)
 				fmt.Printf("[*] Angel found %d available site(s) ...\n", len(s))
