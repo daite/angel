@@ -28,22 +28,22 @@ type ScrapingEx interface {
 var (
 	TorrentURL = map[string]string{
 		"ttobogo":       "https://ttobogo.net",
-		"torrentmobile": "https://torrentmobile69.com",
+		"torrentmobile": "https://torrentmobile73.com",
 		"torrentview":   "https://torrentview39.com",
 		"tshare":        "https://tshare.org",
 		"nyaa":          "https://nyaa.si",
 		"sukebe":        "https://sukebei.nyaa.si",
-		"torrentsir":    "https://torrentsir76.com",
-		"torrentj":      "https://torrentj76.com",
-		"torrentsee":    "https://torrentsee130.com",
-		"jujutorrent":   "https://torrentjuju10.com",
+		"torrentsir":    "https://torrentsir79.com",
+		"torrentj":      "https://torrentj79.com",
+		"torrentsee":    "https://torrentsee135.com",
+		"jujutorrent":   "https://torrentjuju13.com",
 		"torrenttoast":  "https://tttt10.net",
-		"torrentqq":     "https://torrentqq255.com",
+		"torrentqq":     "https://torrentqq229.com",
 		"torrentwiz":    "https://torrentwiz48.com",
-		"torrentgram":   "https://torrentgram45.com",
-		"torrentsome":   "https://torrentsome58.com",
+		"torrentgram":   "https://torrentgram46.com",
+		"torrentsome":   "https://torrentsome62.com",
 		"ktxtorrent":    "https://ktxtorrent37.com",
-		"torrentrj":     "https://torrentrj57.com",
+		"torrentrj":     "https://torrentrj79.com",
 	}
 	UserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_1_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36"
 )
