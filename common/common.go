@@ -34,16 +34,16 @@ var (
 		"nyaa":          "https://nyaa.si",
 		"sukebe":        "https://sukebei.nyaa.si",
 		"torrentsir":    "https://torrentsir86.com",
-		"torrentj":      "https://torrentj82.com",
-		"torrentsee":    "https://torrentsee141.com",
+		"torrentj":      "https://torrentj84.com",
+		"torrentsee":    "https://torrentsee135.com",
 		"jujutorrent":   "https://torrentjuju14.com",
 		"torrenttoast":  "https://tttt10.net",
 		"torrentqq":     "https://torrentqq235.com",
-		"torrentwiz":    "https://torrentwiz51.com",
+		"torrentwiz":    "https://torrentwiz48.com",
 		"torrentgram":   "https://torrentgram47.com",
 		"torrentsome":   "https://torrentsome68.com",
 		"ktxtorrent":    "https://ktxtorrent37.com",
-		"torrentrj":     "https://torrentrj79.com",
+		"torrentrj":     "https://torrentrj67.com",
 	}
 	UserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_1_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36"
 )
