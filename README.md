@@ -1,4 +1,3 @@
-[![Build Status](https://travis-ci.com/daite/angel.svg?branch=main)](https://travis-ci.com/daite/angel)
 ![example workflow name](https://github.com/daite/angel/workflows/Go/badge.svg)
  [![GoDoc](https://godoc.org/github.com/daite/angel?status.png)](http://godoc.org/github.com/daite/angel)
 # 1. Torrent sites
