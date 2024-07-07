@@ -22,3 +22,31 @@
 * [cross compile](https://www.digitalocean.com/community/tutorials/how-to-build-go-executables-for-multiple-platforms-on-ubuntu-16-04)
 # 3. ToDo
  - fetch torrent urls from [추천 토렌트 사이트](http://jaewook.net/archives/2613) but it is not a good approach.
+# 4. Sample code
+<details>
+<summary>Click to toggle contents of `code`</summary>
+
+```go
+// Function to update the URL with a maximum number of retries
+func updateTorrentURL(key string, url string, maxRetries int, wg *sync.WaitGroup, resultChan chan<- struct {
+	key string
+	url string
+}) {
+	defer wg.Done()
+	for i := 0; i < maxRetries; i++ {
+		if checkURL(url) {
+			resultChan <- struct {
+				key string
+				url string
+			}{key, url}
+			return
+		}
+		url = incrementURL(url)
+	}
+	resultChan <- struct {
+		key string
+		url string
+	}{key, ""} // Indicate failure with an empty string
+}
+```
+</details>
