@@ -21,3 +21,5 @@
 * [online regex](https://regex101.com/)
 * [codecoverage](https://codecov.io/gh/daite/)
 * [cross compile](https://www.digitalocean.com/community/tutorials/how-to-build-go-executables-for-multiple-platforms-on-ubuntu-16-04)
+# 3. ToDo
+ - fetch torrent urls from [추천 토렌트 사이트](http://jaewook.net/archives/2613) but it is not a good approach.
