@@ -2,30 +2,7 @@
 ![example workflow name](https://github.com/daite/angel/workflows/Go/badge.svg)
  [![GoDoc](https://godoc.org/github.com/daite/angel?status.png)](http://godoc.org/github.com/daite/angel)
 # 1. Torrent sites
-| No |      site     |             url             | status |
-|:--:|:-------------:|:---------------------------:|:------:|
-|  1 |    ttobogo    | https://ttobogo.net         |    X   |
-|  2 |   torrentube  | https://torrentube.to       |    O   |
-|  3 |     tshare    | https://tshare.org          |    O   |
-|  4 | torrentmobile | https://torrentmobile19.com |    O   |
-|  5 | torrentview   | https://torrentview39.com   |    O   |
-|  6 | torrentsir    | https://torrentsir34.com    |    O   |
-|  7 |   torrentj    | https://torrentj32.com      |    O   |
-|  8 |   torrentsee  | https://torrentsee47.com    |    O   |
-|  9 |  torrentqq    | https://torrentqq73.com     |    O   |
-| 10 | torrenttip    | https://torrenttip19.com    |    X   |
-| 11 | torrentstory  | https://torrentstory13.com  |    X   |
-| 12 | torrentmax    | https://torrentmax15.com    |    O   |
-| 13 | torrentplay   | https://torrentplay10.com   |    X   |
-| 14 | torrentsome   | https://torrentsome24.com   |    O   |
-| 15 | torrentlee    | https://torrentlee14.me     |    X   |
-| 16 | torrentwiz    | https://torrentwiz27.me     |    O   |
-| 17 | torrentgram   | https://torrentgram23.com   |    O   |
-| 18 | jujutorrent   | https://jujutorrent28.com   |    O   |
-| 19 | torrenttoast  | https://tttt10.net          |    O   |
-| 20 | ktxtorrent    | https://ktxtorrent36.com    |    O   |
-| 21 | nyaa          | https://nyaa.si             |    O   |
-| 22 | sukebei       | https://sukebei.nyaa.si     |    O   |
+* [추천 토렌트 사이트](http://jaewook.net/archives/2613)
 # 2. Reference
 * [cli](https://github.com/urfave/cli/blob/master/docs/v2/manual.md)
 * [css selector](https://www.w3schools.com/cssref/css_selectors.asp)
