@@ -23,29 +23,27 @@ func main() {
 				Aliases: []string{"l"},
 				Usage:   "choose torrent sites (kr or jp)",
 			},
-			// Removed the `version` flag from here
 		},
 		Action: func(c *cli.Context) error {
-			// Handle the -v flag to print the version
-			if c.Bool("version") {
+			// Handle the -V flag to print the version
+			if c.Bool("print-version") {
 				fmt.Printf("%s version %s\n", c.App.Name, c.App.Version)
 				return nil
 			}
 
-			// Print usage information if no arguments are provided
-			if c.Args().Len() == 0 && !c.IsSet("lang") {
+			// Handle the case where no arguments are provided
+			if c.Args().Len() == 0 {
 				cli.ShowAppHelp(c)
+				fmt.Printf("\nVersion: %s\n", c.App.Version)
 				return nil
 			}
 
-			// Print usage information if the -l flag is provided
-			if c.IsSet("lang") {
-				cli.ShowAppHelp(c)
-				return nil
+			keyword := "동상이몽2"
+			if c.NArg() > 0 {
+				keyword = c.Args().Get(0)
 			}
 
-			// Proceed with regular processing if a language is specified
-			if lang := c.String("lang"); lang == "kr" {
+			if c.String("lang") == "kr" {
 				s := []common.Scraping{
 					&ktorrent.TorrentMobile{},
 					&ktorrent.TorrentView{},
@@ -59,7 +57,7 @@ func main() {
 				}
 				s = common.GetAvailableSites(s)
 				fmt.Printf("[*] Angel found %d available site(s) ...\n", len(s))
-				data := common.CollectData(s, "")
+				data := common.CollectData(s, keyword)
 				common.PrintData(data)
 			} else {
 				s := []common.ScrapingEx{
@@ -68,19 +66,12 @@ func main() {
 				}
 				s = common.GetAvailableSitesEx(s)
 				fmt.Printf("[*] Angel found %d available site(s) ...\n", len(s))
-				data := common.CollectDataEx(s, "")
+				data := common.CollectDataEx(s, keyword)
 				common.PrintDataEx(data)
 			}
 			return nil
 		},
-		// Use the default error handling for CLI, which avoids the redefined error
 	}
 
-	// Run the app
-	err := app.Run(os.Args)
-	if err != nil {
-		// Log errors
-		fmt.Fprintln(os.Stderr, err)
-		os.Exit(1)
-	}
+	_ = app.Run(os.Args)
 }
