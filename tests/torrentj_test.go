@@ -34,7 +34,7 @@ func TestGetDataFuncForTorrenJ(t *testing.T) {
 	}
 }
 func TestGetMagnetFuncForTorrentJ(t *testing.T) {
-	f, err := os.Open("../../resources/torrentj_bbs.html")
+	f, err := os.Open("../resources/torrentj_bbs.html")
 	if err != nil {
 		log.Fatal(err)
 	}
