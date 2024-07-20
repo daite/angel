@@ -1,4 +1,4 @@
-package jtorrent
+package tests
 
 import (
 	"log"

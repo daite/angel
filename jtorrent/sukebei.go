@@ -1,4 +1,4 @@
-package jtorrent
+package jtorrent_test
 
 import (
 	"net/url"

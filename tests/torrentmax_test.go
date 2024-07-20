@@ -1,4 +1,4 @@
-package ktorrent
+package tests
 
 import (
 	"log"

@@ -1,4 +1,4 @@
-package ktorrent
+package tests
 
 import (
 	"log"
@@ -10,8 +10,8 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-func TestGetDataFuncForTorrentSir(t *testing.T) {
-	f, err := os.Open("../resources/torrentsir_search.html")
+func TestGetDataFuncForTorrentView(t *testing.T) {
+	f, err := os.Open("../resources/torrentview_search.html")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -27,14 +27,14 @@ func TestGetDataFuncForTorrentSir(t *testing.T) {
 		got[title] = link
 	})
 	want := map[string]string{
-		"핫바디 처제 2020.1080p.FHDRip.H264.AAC": "./board.php?bo_table=movie&wr_id=15338",
+		"핫바디 처제 2020.1080p.FHDRip.H264.AAC.mp4": "./board.php?bo_table=mov&wr_id=17286",
 	}
 	if !reflect.DeepEqual(got, want) {
-		t.Errorf("GetData() for TorrentSir = %q, want %q", got, want)
+		t.Errorf("GetData() for TorrentView = %q, want %q", got, want)
 	}
 }
-func TestGetMagnetFuncForTorrentSir(t *testing.T) {
-	f, err := os.Open("../resources/torrentsir_bbs.html")
+func TestGetMagnetFuncForTorrentView(t *testing.T) {
+	f, err := os.Open("../resources/torrentview_bbs.html")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -46,6 +46,6 @@ func TestGetMagnetFuncForTorrentSir(t *testing.T) {
 	got := strings.TrimSpace(doc.Find("ul.list-group").Text())
 	want := "magnet:?xt=urn:btih:1cc7a302e8402c48a76962d6b8f15fa4aab70381"
 	if got != want {
-		t.Errorf("GetMagnet() for TorrentSir = %q, want %q", got, want)
+		t.Errorf("GetMagnet() for TorrentView = %q, want %q", got, want)
 	}
 }

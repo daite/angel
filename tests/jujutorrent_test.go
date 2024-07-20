@@ -1,4 +1,4 @@
-package ktorrent
+package tests
 
 import (
 	"log"
@@ -10,8 +10,8 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-func TestGetDataFuncForTorrentWiz(t *testing.T) {
-	f, err := os.Open("../resources/torrentwiz_search.html")
+func TestGetDataFuncForJuJuTorrent(t *testing.T) {
+	f, err := os.Open("../resources/jujutorrent_search.html")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -27,14 +27,14 @@ func TestGetDataFuncForTorrentWiz(t *testing.T) {
 		got[title] = link
 	})
 	want := map[string]string{
-		"핫바디 처제 2020.1080p.FHDRip.H264.AAC.mp4": "./board.php?bo_table=mov&wr_id=16948",
+		"핫바디 처제 2020.1080p.FHDRip.H264.AAC.mp4": "./board.php?bo_table=mov&wr_id=16869",
 	}
 	if !reflect.DeepEqual(got, want) {
-		t.Errorf("GetData() for torrentwiz = %q, want %q", got, want)
+		t.Errorf("GetData() for JuJuTorrent = %q, want %q", got, want)
 	}
 }
-func TestGetMagnetFuncForTorrentWiz(t *testing.T) {
-	f, err := os.Open("../resources/torrentwiz_bbs.html")
+func TestGetMagnetFuncForJuJuTorrent(t *testing.T) {
+	f, err := os.Open("../resources/jujutorrent_bbs.html")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -46,6 +46,6 @@ func TestGetMagnetFuncForTorrentWiz(t *testing.T) {
 	got := strings.TrimSpace(doc.Find("ul.list-group").Text())
 	want := "magnet:?xt=urn:btih:1cc7a302e8402c48a76962d6b8f15fa4aab70381"
 	if got != want {
-		t.Errorf("GetMagnet() for torrentwiz = %q, want %q", got, want)
+		t.Errorf("GetMagnet() for JuJuTorrent = %q, want %q", got, want)
 	}
 }

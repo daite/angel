@@ -1,4 +1,4 @@
-package ktorrent
+package tests
 
 import (
 	"log"
@@ -10,8 +10,8 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-func TestGetDataFuncForTorrentToast(t *testing.T) {
-	f, err := os.Open("../resources/torrenttoast_search.html")
+func TestGetDataFuncForKTXTorrent(t *testing.T) {
+	f, err := os.Open("../resources/ktxtorrent_search.html")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -27,14 +27,14 @@ func TestGetDataFuncForTorrentToast(t *testing.T) {
 		got[title] = link
 	})
 	want := map[string]string{
-		"O형수박가슴가정부 2020.720p.HDRip.H264.AAC.mp4": "./board.php?bo_table=movie&wr_id=7053",
+		"O형수박가슴가정부 2020.720p.HDRip.H264.AAC": "./board.php?bo_table=movie&wr_id=15694",
 	}
 	if !reflect.DeepEqual(got, want) {
-		t.Errorf("GetData() for TorrentToast = %q, want %q", got, want)
+		t.Errorf("GetData() for KTXTorrent = %q, want %q", got, want)
 	}
 }
-func TestGetMagnetFuncForTorrentToast(t *testing.T) {
-	f, err := os.Open("../resources/torrenttoast_bbs.html")
+func TestGetMagnetFuncForKTXTorrent(t *testing.T) {
+	f, err := os.Open("../resources/ktxtorrent_bbs.html")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -43,14 +43,9 @@ func TestGetMagnetFuncForTorrentToast(t *testing.T) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	got := "no magnet"
-	doc.Find("a.list-group-item").Each(func(i int, s *goquery.Selection) {
-		if m, _ := s.Attr("href"); strings.Contains(m, "magnet:?xt=urn:btih:") {
-			got = m
-		}
-	})
+	got := strings.TrimSpace(doc.Find("ul.list-group").Text())
 	want := "magnet:?xt=urn:btih:baeffe526ecb61e2e774b2e460a5bdddf3f1e195"
 	if got != want {
-		t.Errorf("GetMagnet() for TorrentToast = %q, want %q", got, want)
+		t.Errorf("GetMagnet() for KTXTorrent = %q, want %q", got, want)
 	}
 }
