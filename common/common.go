@@ -197,6 +197,7 @@ func CheckNetWorkFromURL(url string) bool {
 
 // GetAvailableSites function gets available torrent sites
 func GetAvailableSites(oldItems []Scraping) []Scraping {
+	UpdateTorrentURL()
 	fmt.Println("[*] Angel is checking available torrent sites ...")
 	newItems := make([]Scraping, 0)
 	items := []string{
@@ -226,6 +227,7 @@ func GetAvailableSites(oldItems []Scraping) []Scraping {
 
 // GetAvailableSitesEx function gets available torrent sites
 func GetAvailableSitesEx(oldItems []ScrapingEx) []ScrapingEx {
+	UpdateTorrentURL()
 	fmt.Println("[*] Angel is checking available torrent sites ...")
 	newItems := make([]ScrapingEx, 0)
 	items := []string{"nyaa", "sukebe"}
@@ -339,7 +341,7 @@ func generateBar(percentage int) string {
 	return bar
 }
 
-func init() {
+func UpdateTorrentURL() {
 	total := len(TorrentURL)
 	successes := 0
 	failures := 0
