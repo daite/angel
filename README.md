@@ -50,3 +50,6 @@ func updateTorrentURL(key string, url string, maxRetries int, wg *sync.WaitGroup
 }
 ```
 </details>
+
+# 5. How it works (feat.graphviz)
+<img src="https://github.com/daite/angel/blob/main/resources/concept.png" width=70% height=70%>
