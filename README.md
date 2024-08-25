@@ -58,7 +58,7 @@ func updateTorrentURL(key string, url string, maxRetries int, wg *sync.WaitGroup
 
 This guide walks you through setting up a local Homebrew tap and creating a formula to distribute your Go-based application.
 
-First, create the directory structure that Homebrew expects for a tap:
+Create the directory structure that Homebrew expects for a tap:
 
 ```bash
 mkdir -p ~/homebrew-local/Formula
@@ -87,4 +87,8 @@ end
 ```bash
 ln -s ~/homebrew-local /opt/homebrew/Library/Taps/homebrew/homebrew-local
 brew install angel
+```
+If you ever want to remove the tap:
+```bash
+rm -rf /opt/homebrew/Library/Taps/homebrew/homebrew-local
 ```
