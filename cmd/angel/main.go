@@ -42,15 +42,9 @@ func main() {
 			if c.NArg() > 0 {
 				keyword = c.Args().Get(0)
 			}
-
 			if c.String("lang") == "kr" {
 				s := []common.Scraping{
-					&ktorrent.TorrentMobile{},
-					&ktorrent.TorrentView{},
-					&ktorrent.TorrentSir{},
-					&ktorrent.TorrentJ{},
 					&ktorrent.TorrentSee{},
-					&ktorrent.JuJuTorrent{},
 					&ktorrent.TorrentQQ{},
 					&ktorrent.TorrentSome{},
 					&ktorrent.TorrentRJ{},

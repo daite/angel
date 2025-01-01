@@ -36,21 +36,13 @@ const (
 // variable for scraping
 var (
 	TorrentURL = map[string]string{
-		"torrentmobile": "https://torrentmobile100.com",
-		"torrentview":   "https://torrentview39.com",
-		"nyaa":          "https://nyaa.si",
-		"sukebe":        "https://sukebei.nyaa.si",
-		"torrentsir":    "https://torrentsir86.com",
-		"torrentj":      "https://torrentj84.com",
-		"torrentsee":    "https://torrentsee236.com",
-		"jujutorrent":   "https://torrentjuju14.com",
-		"torrentqq":     "https://torrentqq323.com",
-		"torrentwiz":    "https://torrentwiz48.com",
-		"torrentgram":   "https://torrentgram47.com",
-		"torrentsome":   "https://torrentsome150.com",
-		"ktxtorrent":    "https://ktxtorrent37.com",
-		"torrentrj":     "https://torrentrj156.com",
-		"torrenttop":    "https://torrenttop118.com",
+		"nyaa":        "https://nyaa.si",
+		"sukebe":      "https://sukebei.nyaa.si",
+		"torrentsee":  "https://torrentsee266.com",
+		"torrentqq":   "https://torrentqq348.com",
+		"torrentsome": "https://torrentsome175.com",
+		"torrentrj":   "https://torrentrj181.com",
+		"torrenttop":  "https://torrenttop134.com",
 	}
 	UserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_1_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36"
 )
@@ -202,10 +194,7 @@ func GetAvailableSites(oldItems []Scraping) []Scraping {
 	fmt.Println("[*] Angel is checking available torrent sites ...")
 	newItems := make([]Scraping, 0)
 	items := []string{
-		"torrentmobile", "torrentview", "torrentsir",
-		"torrentj", "torrentsee", "jujutorrent",
-		"torrentqq", "torrentsome", "torrentrj",
-		"torrenttop",
+		"torrentsee", "torrentqq", "torrentsome", "torrentrj", "torrenttop",
 	}
 	ch := make(chan int, len(items))
 	var wg sync.WaitGroup
@@ -294,7 +283,10 @@ func incrementURL(url string) string {
 
 // Function to check the response code of the URL
 func checkURL(url string) bool {
-	resp, err := http.Get(url)
+	client := &http.Client{
+		Timeout: 1 * time.Second,
+	}
+	resp, err := client.Get(url)
 	if err != nil {
 		return false
 	}
@@ -348,7 +340,7 @@ func UpdateTorrentURL() {
 	successes := 0
 	failures := 0
 	current := 0
-	maxRetries := 10 // Define a maximum number of retries
+	maxRetries := 3 // Define a maximum number of retries
 
 	var wg sync.WaitGroup
 	resultChan := make(chan struct {
