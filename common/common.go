@@ -38,11 +38,11 @@ var (
 	TorrentURL = map[string]string{
 		"nyaa":        "https://nyaa.si",
 		"sukebe":      "https://sukebei.nyaa.si",
-		"torrentsee":  "https://torrentsee266.com",
-		"torrentqq":   "https://torrentqq348.com",
-		"torrentsome": "https://torrentsome175.com",
-		"torrentrj":   "https://torrentrj181.com",
-		"torrenttop":  "https://torrenttop134.com",
+		"torrentsee":  "https://torrentsee274.com",
+		"torrentqq":   "https://torrentqq356.com",
+		"torrentsome": "https://torrentsome183.com",
+		"torrentrj":   "https://torrentrj189.com",
+		"torrenttop":  "https://torrenttop142.com",
 	}
 	UserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_1_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36"
 )
