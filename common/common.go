@@ -6,13 +6,12 @@ import (
 	"net/http"
 	"net/url"
 	"os"
-	"regexp"
 	"sort"
-	"strconv"
 	"strings"
 	"sync"
 	"time"
 
+	"github.com/PuerkitoBio/goquery"
 	"github.com/olekukonko/tablewriter"
 )
 
@@ -26,7 +25,7 @@ type ScrapingEx interface {
 	Crawl(string) map[string][]string
 }
 
-// ANSI escape codes for colored output
+// Color constants for progress output
 const (
 	Reset = "\033[0m"
 	Green = "\033[32m"
@@ -38,11 +37,11 @@ var (
 	TorrentURL = map[string]string{
 		"nyaa":        "https://nyaa.si",
 		"sukebe":      "https://sukebei.nyaa.si",
-		"torrentsee":  "https://torrentsee274.com",
-		"torrentqq":   "https://torrentqq356.com",
-		"torrentsome": "https://torrentsome183.com",
-		"torrentrj":   "https://torrentrj189.com",
-		"torrenttop":  "https://torrenttop142.com",
+		"torrentsee":  "torrentsee",
+		"torrentqq":   "torrentqq",
+		"torrentsome": "torrentsome",
+		"torrentrj":   "torrentrj",
+		"torrenttop":  "torrenttop",
 	}
 	UserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_1_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36"
 )
@@ -190,7 +189,6 @@ func CheckNetWorkFromURL(url string) bool {
 
 // GetAvailableSites function gets available torrent sites
 func GetAvailableSites(oldItems []Scraping) []Scraping {
-	UpdateTorrentURL()
 	fmt.Println("[*] Angel is checking available torrent sites ...")
 	newItems := make([]Scraping, 0)
 	items := []string{
@@ -218,7 +216,6 @@ func GetAvailableSites(oldItems []Scraping) []Scraping {
 
 // GetAvailableSitesEx function gets available torrent sites
 func GetAvailableSitesEx(oldItems []ScrapingEx) []ScrapingEx {
-	UpdateTorrentURL()
 	fmt.Println("[*] Angel is checking available torrent sites ...")
 	newItems := make([]ScrapingEx, 0)
 	items := []string{"nyaa", "sukebe"}
@@ -257,72 +254,60 @@ func RemoveNonAscII(s string) string {
 	return result.String()
 }
 
-/////////////////////////////////////////
-// http://jaewook.net/archives/2613 /////
-/////////////////////////////////////////
+// ------------------------------------------------------------------------------
+// New functions to scrape torrent URLs from an HTML table and update TorrentURL
+// with alignment for Korean site names and a progress indicator.
+// ------------------------------------------------------------------------------
 
-// Function to increment the URL number using regex
-func incrementURL(url string) string {
-	re := regexp.MustCompile(`(https://[a-zA-Z]+)(\d+)(\.(com|net))`)
-	matches := re.FindStringSubmatch(url)
-	if matches == nil {
-		return url // Return the original URL if regex doesn't match
-	}
-
-	// Convert the number to an integer and increment it
-	num, err := strconv.Atoi(matches[2])
+// FetchTorrentURLsFromHTML fetches the HTML page at scrapeURL, parses the table rows,
+// and returns a map of raw site names (in Korean) to their URLs.
+func FetchTorrentURLsFromHTML(scrapeURL string) (map[string]string, error) {
+	resp, err := http.Get(scrapeURL)
 	if err != nil {
-		return url // Return the original URL if conversion fails
-	}
-	num++
-
-	// Construct the new URL
-	newURL := matches[1] + strconv.Itoa(num) + matches[3]
-	return newURL
-}
-
-// Function to check the response code of the URL
-func checkURL(url string) bool {
-	client := &http.Client{
-		Timeout: 1 * time.Second,
-	}
-	resp, err := client.Get(url)
-	if err != nil {
-		return false
+		return nil, fmt.Errorf("failed to fetch page: %v", err)
 	}
 	defer resp.Body.Close()
-	return resp.StatusCode == 200
-}
 
-// Function to update the URL with a maximum number of retries
-func updateTorrentURL(key string, url string, maxRetries int, wg *sync.WaitGroup, resultChan chan<- struct {
-	key string
-	url string
-}) {
-	defer wg.Done()
-	for i := 0; i < maxRetries; i++ {
-		if checkURL(url) {
-			resultChan <- struct {
-				key string
-				url string
-			}{key, url}
-			return
-		}
-		url = incrementURL(url)
+	if resp.StatusCode != 200 {
+		return nil, fmt.Errorf("status code error: %d %s", resp.StatusCode, resp.Status)
 	}
-	resultChan <- struct {
-		key string
-		url string
-	}{key, ""} // Indicate failure with an empty string
+	doc, err := goquery.NewDocumentFromReader(resp.Body)
+	if err != nil {
+		return nil, fmt.Errorf("failed to parse HTML: %v", err)
+	}
+	torrentURLs := make(map[string]string)
+	doc.Find("tr").Each(func(i int, s *goquery.Selection) {
+		tds := s.Find("td")
+		if tds.Length() >= 3 {
+			rawSiteName := strings.TrimSpace(tds.Eq(1).Text())
+			link, exists := tds.Eq(2).Find("a").Attr("href")
+			if exists && rawSiteName != "" && link != "" {
+				torrentURLs[rawSiteName] = link
+			}
+		}
+	})
+	return torrentURLs, nil
 }
 
-// Function to display a progress bar
-func displayProgress(current, total, successes, failures int) {
-	progress := (current * 100) / total
-	fmt.Printf("\r[*] angel is updating torrent URLs: %d/%d [%s] %d%% Successes: %s%d%s Failures: %s%d%s",
-		current, total, generateBar(progress), progress, Green, successes, Reset, Red, failures, Reset)
+// alignSiteName maps the Korean site name to the internal English key.
+func alignSiteName(koreanName string) string {
+	switch koreanName {
+	case "토렌트쓱", "토렌트씨":
+		return "torrentsee"
+	case "토렌트큐큐":
+		return "torrentqq"
+	case "토렌트탑":
+		return "torrenttop"
+	case "토렌트알지":
+		return "torrentrj"
+	case "토렌트썸":
+		return "torrentsome"
+	default:
+		return ""
+	}
 }
 
+// generateBar returns a string progress bar given a percentage.
 func generateBar(percentage int) string {
 	bar := ""
 	for i := 0; i < 50; i++ {
@@ -335,39 +320,47 @@ func generateBar(percentage int) string {
 	return bar
 }
 
-func UpdateTorrentURL() {
-	total := len(TorrentURL)
-	successes := 0
-	failures := 0
-	current := 0
-	maxRetries := 3 // Define a maximum number of retries
+// displayProgress prints the progress of URL updates.
+func displayProgress(current, total, successes, failures int) {
+	progress := (current * 100) / total
+	fmt.Printf("\r[*] Updating torrent URLs: %d/%d [%s] %d%% Successes: %s%d%s Failures: %s%d%s",
+		current, total, generateBar(progress), progress, Green, successes, Reset, Red, failures, Reset)
+}
 
-	var wg sync.WaitGroup
-	resultChan := make(chan struct {
+// UpdateTorrentURLsFromHTMLWithProgress fetches torrent URLs from the provided scrapeURL,
+// aligns the Korean site names to internal keys, and updates the global TorrentURL map
+// while displaying progress.
+func UpdateTorrentURLsFromHTMLWithProgress(scrapeURL string) error {
+	newURLs, err := FetchTorrentURLsFromHTML(scrapeURL)
+	if err != nil {
+		return err
+	}
+	var alignedUpdates []struct {
 		key string
 		url string
-	})
-
-	for key, url := range TorrentURL {
-		wg.Add(1)
-		go updateTorrentURL(key, url, maxRetries, &wg, resultChan)
 	}
-
-	go func() {
-		wg.Wait()
-		close(resultChan)
-	}()
-
-	for result := range resultChan {
-		current++
-		if result.url != "" {
-			TorrentURL[result.key] = result.url
-			successes++
-		} else {
-			//fmt.Printf("Failed to update URL for key %s\n", result.key)
-			failures++
+	for rawName, url := range newURLs {
+		alignedKey := alignSiteName(rawName)
+		if alignedKey != "" {
+			alignedUpdates = append(alignedUpdates, struct {
+				key string
+				url string
+			}{alignedKey, url})
 		}
-		displayProgress(current, total, successes, failures)
 	}
-	fmt.Println("\n[*] Angel completed to update torrent URLs")
+	total := len(alignedUpdates)
+	if total == 0 {
+		log.Println("No matching torrent URLs found for update.")
+		return nil
+	}
+	successes := 0
+	failures := 0
+	for i, update := range alignedUpdates {
+		TorrentURL[update.key] = update.url
+		successes++
+		displayProgress(i+1, total, successes, failures)
+		time.Sleep(100 * time.Millisecond)
+	}
+	fmt.Println("\n[*] TorrentURL map has been updated from HTML scraping with progress.")
+	return nil
 }

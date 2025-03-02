@@ -10,7 +10,7 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
-var version = "0.8.1"
+var version = "0.9.0"
 
 func main() {
 	app := &cli.App{
@@ -42,31 +42,37 @@ func main() {
 			if c.NArg() > 0 {
 				keyword = c.Args().Get(0)
 			}
+
 			if c.String("lang") == "kr" {
-				s := []common.Scraping{
+				scrapeURL := "http://jaewook.net/archives/2613"
+				err := common.UpdateTorrentURLsFromHTMLWithProgress(scrapeURL)
+				if err != nil {
+					fmt.Printf("Error updating torrent URLs: %v\n", err)
+				}
+
+				sites := []common.Scraping{
 					&ktorrent.TorrentSee{},
 					&ktorrent.TorrentQQ{},
 					&ktorrent.TorrentSome{},
 					&ktorrent.TorrentRJ{},
 					&ktorrent.TorrentTop{},
 				}
-				s = common.GetAvailableSites(s)
-				fmt.Printf("[*] Angel found %d available site(s) ...\n", len(s))
-				data := common.CollectData(s, keyword)
+				sites = common.GetAvailableSites(sites)
+				fmt.Printf("[*] Angel found %d available site(s) ...\n", len(sites))
+				data := common.CollectData(sites, keyword)
 				common.PrintData(data)
 			} else {
-				s := []common.ScrapingEx{
+				sites := []common.ScrapingEx{
 					&jtorrent.Nyaa{},
 					&jtorrent.SuKeBe{},
 				}
-				s = common.GetAvailableSitesEx(s)
-				fmt.Printf("[*] Angel found %d available site(s) ...\n", len(s))
-				data := common.CollectDataEx(s, keyword)
+				sites = common.GetAvailableSitesEx(sites)
+				fmt.Printf("[*] Angel found %d available site(s) ...\n", len(sites))
+				data := common.CollectDataEx(sites, keyword)
 				common.PrintDataEx(data)
 			}
 			return nil
 		},
 	}
-
 	_ = app.Run(os.Args)
 }
