@@ -292,7 +292,7 @@ func FetchTorrentURLsFromHTML(scrapeURL string) (map[string]string, error) {
 // alignSiteName maps the Korean site name to the internal English key.
 func alignSiteName(koreanName string) string {
 	switch koreanName {
-	case "토렌트쓱", "토렌트씨":
+	case "토렌트씨":
 		return "torrentsee"
 	case "토렌트큐큐":
 		return "torrentqq"
