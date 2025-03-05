@@ -189,7 +189,7 @@ func CheckNetWorkFromURL(url string) bool {
 
 // GetAvailableSites function gets available torrent sites
 func GetAvailableSites(oldItems []Scraping) []Scraping {
-	fmt.Println("[*] Angel is checking available torrent sites ...")
+	fmt.Println("\r[*] Angel is checking available torrent sites ...")
 	newItems := make([]Scraping, 0)
 	items := []string{
 		"torrentsee", "torrentqq", "torrentsome", "torrentrj", "torrenttop",
@@ -256,7 +256,7 @@ func RemoveNonAscII(s string) string {
 
 // ------------------------------------------------------------------------------
 // New functions to scrape torrent URLs from an HTML table and update TorrentURL
-// with alignment for Korean site names and a progress indicator.
+// with alignment for Korean site names and a spinner indicator.
 // ------------------------------------------------------------------------------
 
 // FetchTorrentURLsFromHTML fetches the HTML page at scrapeURL, parses the table rows,
@@ -307,29 +307,27 @@ func alignSiteName(koreanName string) string {
 	}
 }
 
-// generateBar returns a string progress bar given a percentage.
-func generateBar(percentage int) string {
-	bar := ""
-	for i := 0; i < 50; i++ {
-		if i < (percentage / 2) {
-			bar += "="
-		} else {
-			bar += " "
+// spinner displays a rotating indicator until signaled to stop.
+func spinner(msg string, done chan bool) {
+	spinChars := []rune{'\\', '|', '/', '-'}
+	i := 0
+	for {
+		select {
+		case <-done:
+			blanks := strings.Repeat(" ", len(msg)+2)
+			fmt.Printf("\r%s\r", blanks)
+			return
+		default:
+			fmt.Printf("\r%c %s", spinChars[i%len(spinChars)], msg)
+			time.Sleep(100 * time.Millisecond)
+			i++
 		}
 	}
-	return bar
-}
-
-// displayProgress prints the progress of URL updates.
-func displayProgress(current, total, successes, failures int) {
-	progress := (current * 100) / total
-	fmt.Printf("\r[*] Updating torrent URLs: %d/%d [%s] %d%% Successes: %s%d%s Failures: %s%d%s",
-		current, total, generateBar(progress), progress, Green, successes, Reset, Red, failures, Reset)
 }
 
 // UpdateTorrentURLsFromHTMLWithProgress fetches torrent URLs from the provided scrapeURL,
 // aligns the Korean site names to internal keys, and updates the global TorrentURL map
-// while displaying progress.
+// while displaying a spinner.
 func UpdateTorrentURLsFromHTMLWithProgress(scrapeURL string) error {
 	newURLs, err := FetchTorrentURLsFromHTML(scrapeURL)
 	if err != nil {
@@ -353,14 +351,15 @@ func UpdateTorrentURLsFromHTMLWithProgress(scrapeURL string) error {
 		log.Println("No matching torrent URLs found for update.")
 		return nil
 	}
-	successes := 0
-	failures := 0
-	for i, update := range alignedUpdates {
+
+	done := make(chan bool)
+	go spinner("Updating torrent URLs...", done)
+
+	for _, update := range alignedUpdates {
 		TorrentURL[update.key] = update.url
-		successes++
-		displayProgress(i+1, total, successes, failures)
 		time.Sleep(100 * time.Millisecond)
 	}
-	fmt.Println("\n[*] TorrentURL map has been updated from HTML scraping with progress.")
+
+	done <- true
 	return nil
 }
