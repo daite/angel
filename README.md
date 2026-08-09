@@ -114,7 +114,7 @@ Configuration is stored in `~/.tspider.json`:
 
 ## Architecture
 
-```
+```text
 tspider/
 ├── cmd/tspider/     # CLI entry point
 ├── common/          # Config, Doctor, Spinner, utilities
@@ -122,6 +122,127 @@ tspider/
 ├── jtorrent/        # Japanese torrent site scrapers
 └── tests/           # Unit tests
 ```
+
+The CLI is the orchestration layer. It selects a command, loads shared
+configuration from `common`, and delegates searches to scraper implementations
+through either the `Scraping` or `ScrapingEx` interface.
+
+```mermaid
+flowchart TD
+    User[User] --> CLI[cmd/tspider CLI]
+    CLI --> Command{Command}
+
+    Command -->|search| Search[Search orchestration]
+    Command -->|doctor| Doctor[Concurrent health checks]
+    Command -->|config| Config[Configuration management]
+
+    Config <--> ConfigFile[~/.tspider.json]
+    Doctor --> HTTP[Shared HTTP utilities]
+    Doctor --> Status[Availability report]
+
+    Search --> Config
+    Search --> Language{Language}
+    Language -->|kr| Korean[ktorrent scrapers]
+    Language -->|jp or default| Japanese[jtorrent scrapers]
+    Korean --> HTTP
+    Japanese --> HTTP
+    HTTP --> Sites[Remote torrent sites]
+    Korean --> Merge[Result aggregation]
+    Japanese --> Merge
+    Merge --> Table[Console table]
+
+    Spinner[Spinner goroutine] -. progress .-> Doctor
+    Spinner -. progress .-> Search
+```
+
+### Search workflow
+
+```mermaid
+sequenceDiagram
+    actor User
+    participant CLI as tspider CLI
+    participant Config as common.Config
+    participant Check as Availability checks
+    participant Collect as Result collector
+    participant Scraper as Site scrapers
+    participant Site as Remote sites
+    participant Output as Console output
+
+    User->>CLI: search keyword and optional language
+    CLI->>Config: load enabled site URLs and timeout
+    CLI->>Check: probe candidate sites
+    par One goroutine per candidate site
+        Check->>Site: HTTP availability request
+        Site-->>Check: status
+    end
+    Check-->>CLI: available scrapers
+    CLI->>Collect: CollectData or CollectDataEx
+    par One goroutine per available scraper
+        Collect->>Scraper: Crawl keyword
+        Scraper->>Site: fetch search page
+        Site-->>Scraper: result links
+        Scraper->>Site: fetch result details concurrently
+        Site-->>Scraper: magnet and metadata
+        Scraper-->>Collect: site result map
+    end
+    Collect->>Collect: wait, close channel, merge maps
+    Collect-->>CLI: aggregated results
+    CLI->>Output: stop spinner and print table
+    Output-->>User: torrent results
+```
+
+### Concurrency model
+
+TSpider uses goroutines at several levels. `sync.WaitGroup` creates a clear join
+point at each level, channels transfer completed results to the aggregator, and
+the spinner runs independently while work is in progress.
+
+```mermaid
+flowchart TB
+    Main[CLI goroutine] --> Availability[Availability stage]
+    Availability --> A1[Site check 1]
+    Availability --> A2[Site check 2]
+    Availability --> AN[Site check N]
+    A1 --> AvailableChannel[Available-site channel]
+    A2 --> AvailableChannel
+    AN --> AvailableChannel
+    AvailableChannel --> AvailabilityJoin[WaitGroup join]
+
+    AvailabilityJoin --> Collection[Collection stage]
+    Collection --> S1[Scraper goroutine 1]
+    Collection --> S2[Scraper goroutine 2]
+    Collection --> SN[Scraper goroutine N]
+
+    S1 --> KDetail[Korean detail goroutines]
+    S2 --> JPWorkers[Japanese worker pool: 5 workers]
+    SN --> Detail[Scraper-specific detail fetches]
+
+    KDetail --> SafeMap[sync.Map]
+    JPWorkers --> DataChannel[Detail-result channel]
+    Detail --> LocalResults[Site-local results]
+
+    SafeMap --> SiteChannel[Buffered site-result channel]
+    DataChannel --> SiteChannel
+    LocalResults --> SiteChannel
+    SiteChannel --> CollectionJoin[WaitGroup join and channel close]
+    CollectionJoin --> Merge[Single-goroutine merge]
+    Merge --> Print[Sorted table output]
+
+    Spinner[Spinner goroutine] -. atomic progress counters .-> Availability
+    Spinner -. atomic progress counters .-> Collection
+```
+
+- Availability checks fan out one goroutine per candidate site.
+- `CollectData` and `CollectDataEx` fan out one goroutine per available scraper;
+  their buffered channel has room for one result map per scraper.
+- Korean scrapers fetch result detail pages concurrently and store them in a
+  `sync.Map`. The currently selected Korean search path uses `torrenttop`.
+- Japanese scrapers use five workers per site to limit concurrent detail
+  requests and reduce the chance of HTTP `429 Too Many Requests` responses.
+- The spinner protects its message with a mutex and tracks progress with atomic
+  counters, so rendering does not race with worker updates.
+- Each stage waits for its workers before closing its channel. The final map is
+  merged by one goroutine after collection, avoiding concurrent writes to it.
 
 ## Authors
 
